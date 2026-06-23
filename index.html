@@ -1,0 +1,698 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>HCH Inmobiliaria Sonora — S.A. de C.V.</title>
+  <link rel="stylesheet" href="css/styles.css" />
+  <link rel="stylesheet" href="css/mediaqueries.css" />
+  <link rel="icon" href="/assets/icono.png" type="image/png">
+
+  <!-- EmailJS -->
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+  <script>emailjs.init('JZlXr-VuJau-2--WH');</script>
+</head>
+
+<body>
+
+
+  <!-- Cursor -->
+  <div class="cursor" id="cursor"></div>
+  <div class="cursor-follower" id="cursorFollower"></div>
+
+  <div class="mobile-menu" id="mobileMenu">
+    <div class="mobile-menu-inner">
+      <div class="mobile-menu-logo">
+        <img src="assets/LogoHCHv1.png" alt="HCH" />
+      </div>
+      <nav class="mobile-menu-links">
+        <a href="#nosotros"   class="mobile-link">Nosotros</a>
+        <a href="#propiedades" class="mobile-link">Propiedades</a>
+        <a href="#ubicacion"  class="mobile-link">Ubicación</a>
+        <a href="#servicios"  class="mobile-link">Servicios</a>
+        <a href="#testimonios" class="mobile-link">Testimonios</a>
+      </nav>
+      <div class="mobile-menu-cta">
+        <button class="btn-primary full-w" id="openContactModalMobile">Contáctanos</button>
+      </div>
+    </div>
+  </div>
+  <div class="mobile-overlay" id="mobileOverlay"></div>
+
+
+  <!-- Navbar -->
+  <nav class="navbar" id="navbar">
+    <div class="nav-container">
+
+      <!-- Logo -->
+      <a href="#hero" class="nav-logo">
+        <img src="assets/LogoHCHv1.png" alt="HCH Inmobiliaria" class="nav-logo-img" />
+      </a>
+
+      <!-- Links -->
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#nosotros" class="nav-link">Nosotros</a></li>
+        <li><a href="#propiedades" class="nav-link">Propiedades</a></li>
+        <li><a href="#ubicacion" class="nav-link">Ubicación</a></li>
+        <li><a href="#servicios" class="nav-link">Servicios</a></li>
+        <li><a href="#testimonios" class="nav-link">Testimonios</a></li>
+      </ul>
+
+      <!-- CTA y hamburger -->
+      <div class="nav-right">
+        <button class="nav-cta" id="openContactModal">Contáctanos</button>
+        <button class="hamburger" id="hamburger" aria-label="Menú">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+
+    </div>
+  </nav>
+
+
+  <!-- Hero -->
+  <section class="hero" id="hero">
+    <div class="hero-bg">
+      <div class="hero-bg-placeholder"></div>
+      <div class="hero-overlay"></div>
+    </div>
+    <div class="hero-content">
+      <p class="hero-eyebrow">Inmobiliaria · Sonora, México</p>
+      <h1 class="hero-title">
+        Inmobiliaria<br /><em> HCH</em>
+      </h1>
+      <p class="hero-subtitle">
+        Más de 6 años conectando familias sonorenses con propiedades excepcionales.
+        Confianza, elegancia y resultados.
+      </p>
+      <div class="hero-actions">
+        <a href="#propiedades" class="btn-primary">Ver Propiedades</a>
+        <button class="btn-ghost" id="openContactModalHero">Agendar Visita</button>
+      </div>
+    </div>
+    <div class="hero-stats">
+      <div class="stat">
+        <span class="stat-num" data-count="30">0</span><span class="stat-sym">+</span>
+        <span class="stat-label">Propiedades en renta</span>
+      </div>
+      <div class="stat-divider"></div>
+      <div class="stat">
+        <span class="stat-num" data-count="6">0</span><span class="stat-sym">+</span>
+        <span class="stat-label">Años de Experiencia</span>
+      </div>
+      <div class="stat-divider"></div>
+      <div class="stat">
+        <span class="stat-num" data-count="98">0</span><span class="stat-sym">%</span>
+        <span class="stat-label">Clientes Satisfechos</span>
+      </div>
+    </div>
+    <div class="hero-scroll-indicator">
+      <span>Descubre más</span>
+      <div class="scroll-line"></div>
+    </div>
+  </section>
+
+
+  <!-- Nosotros -->
+  <section class="nosotros" id="nosotros">
+    <div class="container">
+      <div class="nosotros-grid">
+        <div class="nosotros-media reveal-left">
+          <div class="about-img-wrap">
+            <div class="about-img-placeholder"></div>
+            <div class="about-accent-line"></div>
+          </div>
+        </div>
+        <div class="nosotros-content reveal-right">
+          <p class="section-eyebrow">Sobre Nosotros</p>
+          <h2 class="section-title">Expertos en el mercado <em>inmobiliario de Sonora</em></h2>
+          <p class="nosotros-text">
+            En HCH Inmobiliaria Sonora S.A. de C.V., combinamos décadas de experiencia local
+            con un enfoque moderno y personalizado. Cada propiedad es una historia, y cada
+            cliente merece encontrar la suya.
+          </p>
+          <p class="nosotros-text">
+            Nuestro equipo de asesores certificados te acompaña desde la búsqueda inicial
+            hasta la firma del contrato, garantizando transparencia y resultados.
+          </p>
+          <div class="nosotros-tags">
+            <span class="tag">Compra</span>
+            <span class="tag">Venta</span>
+            <span class="tag">Renta</span>
+            <span class="tag">Inversión</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- Propiedades -->
+  <section class="propiedades" id="propiedades">
+    <div class="container">
+      <div class="section-header reveal-up">
+        <p class="section-eyebrow">Nuestras Propiedades</p>
+        <h2 class="section-title">Encuentra tu espacio <em>perfecto</em></h2>
+        <p class="section-desc">Selección exclusiva de propiedades residenciales y comerciales en Sonora.</p>
+      </div>
+
+      <div class="filtros reveal-up">
+        <button class="filtro-btn active" data-filter="todos">Todos</button>
+        <button class="filtro-btn" data-filter="casa">Casas</button>
+        <button class="filtro-btn" data-filter="departamento">Departamentos</button>
+        <button class="filtro-btn" data-filter="terreno">Terrenos</button>
+        <button class="filtro-btn" data-filter="comercial">Comercial</button>
+      </div>
+
+      <!-- Próximamente -->
+      <div class="proximamente reveal-up">
+        <h3>Próximamente</h3>
+      </div>
+      <!-- De aquí
+      <div class="propiedades-grid" id="propiedadesGrid">
+        <article class="propiedad-card reveal-up" data-tipo="casa"
+          data-nombre="Residencia Los Olivos"
+          data-precio="$4,500,000 MXN"
+          data-recamaras="4" data-banos="3.5" data-m2="320" data-estacionamientos="2"
+          data-descripcion="Elegante residencia en fraccionamiento privado con acabados de primera calidad, jardín, alberca y sistema de seguridad 24/7. Ubicación premium en zona residencial."
+          data-ubicacion="Hermosillo, Sonora"
+          data-fotos="assets/prop1.jpg|assets/prop1b.jpg|assets/prop1c.jpg">
+          <div class="card-img-wrap">
+            <div class="card-slider">
+              <div class="card-slides">
+                <div class="card-slide" style="background:#e8e0d0;"></div>
+                <div class="card-slide" style="background:#d4c9b8;"></div>
+                <div class="card-slide" style="background:#c8bfad;"></div>
+              </div>
+              <div class="card-slider-dots"></div>
+            </div>
+            <div class="card-badge">En Venta</div>
+          </div>
+          <div class="card-body">
+            <p class="card-ubicacion">Hermosillo, Sonora</p>
+            <h3 class="card-nombre">Residencia Los Olivos</h3>
+            <p class="card-precio">$4,500,000 <span>MXN</span></p>
+            <div class="card-specs">
+              <span>4 rec.</span><span>·</span>
+              <span>3.5 baños</span><span>·</span>
+              <span>320 m²</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="propiedad-card reveal-up delay-1" data-tipo="departamento"
+          data-nombre="Torre Dorada 802"
+          data-precio="$2,200,000 MXN"
+          data-recamaras="2" data-banos="2" data-m2="95" data-estacionamientos="1"
+          data-descripcion="Moderno departamento en torre de lujo con vista panorámica a la ciudad. Amenidades de primer nivel: gimnasio, rooftop, lobby de concierge y seguridad biométrica."
+          data-ubicacion="Hermosillo, Sonora"
+          data-fotos="assets/prop2.jpg|assets/prop2b.jpg">
+          <div class="card-img-wrap">
+            <div class="card-slider">
+              <div class="card-slides">
+                <div class="card-slide" style="background:#d8d0c0;"></div>
+                <div class="card-slide" style="background:#c8c0b0;"></div>
+              </div>
+              <div class="card-slider-dots"></div>
+            </div>
+            <div class="card-badge nuevo">Nuevo</div>
+          </div>
+          <div class="card-body">
+            <p class="card-ubicacion">Hermosillo, Sonora</p>
+            <h3 class="card-nombre">Torre Dorada 802</h3>
+            <p class="card-precio">$2,200,000 <span>MXN</span></p>
+            <div class="card-specs">
+              <span>2 rec.</span><span>·</span>
+              <span>2 baños</span><span>·</span>
+              <span>95 m²</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="propiedad-card reveal-up delay-2" data-tipo="casa"
+          data-nombre="Hacienda San Miguel"
+          data-precio="$6,800,000 MXN"
+          data-recamaras="5" data-banos="4" data-m2="480" data-estacionamientos="3"
+          data-descripcion="Majestuosa hacienda contemporánea con diseño arquitectónico único. Cuenta con bodega de vinos, cine privado, cuarto de servicio completo y amplio jardín."
+          data-ubicacion="Guaymas, Sonora"
+          data-fotos="assets/prop3.jpg|assets/prop3b.jpg|assets/prop3c.jpg">
+          <div class="card-img-wrap">
+            <div class="card-slider">
+              <div class="card-slides">
+                <div class="card-slide" style="background:#ccc5b0;"></div>
+                <div class="card-slide" style="background:#bfb9a5;"></div>
+                <div class="card-slide" style="background:#b3ad9a;"></div>
+              </div>
+              <div class="card-slider-dots"></div>
+            </div>
+            <div class="card-badge exclusiva">Exclusiva</div>
+          </div>
+          <div class="card-body">
+            <p class="card-ubicacion">Guaymas, Sonora</p>
+            <h3 class="card-nombre">Hacienda San Miguel</h3>
+            <p class="card-precio">$6,800,000 <span>MXN</span></p>
+            <div class="card-specs">
+              <span>5 rec.</span><span>·</span>
+              <span>4 baños</span><span>·</span>
+              <span>480 m²</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="propiedad-card reveal-up" data-tipo="terreno"
+          data-nombre="Terreno Vista Mar"
+          data-precio="$1,800,000 MXN"
+          data-recamaras="—" data-banos="—" data-m2="600" data-estacionamientos="—"
+          data-descripcion="Terreno plano con vista al mar en zona de alto desarrollo. Servicios completos, escrituras en regla, acceso pavimentado. Ideal para construcción de residencia de lujo."
+          data-ubicacion="San Carlos, Sonora"
+          data-fotos="assets/prop4.jpg">
+          <div class="card-img-wrap">
+            <div class="card-slider">
+              <div class="card-slides">
+                <div class="card-slide" style="background:#ddd8c8;"></div>
+              </div>
+              <div class="card-slider-dots"></div>
+            </div>
+            <div class="card-badge">En Venta</div>
+          </div>
+          <div class="card-body">
+            <p class="card-ubicacion">San Carlos, Sonora</p>
+            <h3 class="card-nombre">Terreno Vista Mar</h3>
+            <p class="card-precio">$1,800,000 <span>MXN</span></p>
+            <div class="card-specs">
+              <span>600 m²</span><span>·</span>
+              <span>Vista al mar</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="propiedad-card reveal-up delay-1" data-tipo="comercial"
+          data-nombre="Local Comercial Centro"
+          data-precio="$3,100,000 MXN"
+          data-recamaras="—" data-banos="2" data-m2="210" data-estacionamientos="4"
+          data-descripcion="Local comercial en zona de alta afluencia peatonal. Planta baja y mezzanine, bodega, 2 baños y estacionamiento privado. Ideal para restaurante, boutique o consultorio."
+          data-ubicacion="Hermosillo, Sonora"
+          data-fotos="assets/prop5.jpg|assets/prop5b.jpg">
+          <div class="card-img-wrap">
+            <div class="card-slider">
+              <div class="card-slides">
+                <div class="card-slide" style="background:#d0c8b8;"></div>
+                <div class="card-slide" style="background:#c4bca8;"></div>
+              </div>
+              <div class="card-slider-dots"></div>
+            </div>
+            <div class="card-badge">En Venta</div>
+          </div>
+          <div class="card-body">
+            <p class="card-ubicacion">Hermosillo, Sonora</p>
+            <h3 class="card-nombre">Local Comercial Centro</h3>
+            <p class="card-precio">$3,100,000 <span>MXN</span></p>
+            <div class="card-specs">
+              <span>2 baños</span><span>·</span>
+              <span>210 m²</span><span>·</span>
+              <span>4 est.</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="propiedad-card reveal-up delay-2" data-tipo="departamento"
+          data-nombre="Penthouse Diamante"
+          data-precio="$5,900,000 MXN"
+          data-recamaras="3" data-banos="3" data-m2="185" data-estacionamientos="2"
+          data-descripcion="Penthouse de lujo con terraza privada de 80 m², jacuzzi exterior y vistas de 360°. Acabados de importación, cocina integral y sala de estar independiente."
+          data-ubicacion="Hermosillo, Sonora"
+          data-fotos="assets/prop6.jpg|assets/prop6b.jpg|assets/prop6c.jpg">
+          <div class="card-img-wrap">
+            <div class="card-slider">
+              <div class="card-slides">
+                <div class="card-slide" style="background:#e4dcc8;"></div>
+                <div class="card-slide" style="background:#d8d0bc;"></div>
+                <div class="card-slide" style="background:#ccc4b0;"></div>
+              </div>
+              <div class="card-slider-dots"></div>
+            </div>
+            <div class="card-badge exclusiva">Exclusiva</div>
+          </div>
+          <div class="card-body">
+            <p class="card-ubicacion">Hermosillo, Sonora</p>
+            <h3 class="card-nombre">Penthouse Diamante</h3>
+            <p class="card-precio">$5,900,000 <span>MXN</span></p>
+            <div class="card-specs">
+              <span>3 rec.</span><span>·</span>
+              <span>3 baños</span><span>·</span>
+              <span>185 m²</span>
+            </div>
+          </div>
+        </article>
+
+      </div>
+    </div>
+      Hasta aquí-->
+  </section>
+  
+
+  <!-- Mapa -->
+  <section class="mapa-section" id="ubicacion">
+    <div class="container">
+      <div class="section-header reveal-up">
+        <p class="section-eyebrow">Visítanos</p>
+        <h2 class="section-title">Nuestra <em>ubicación</em></h2>
+        <p class="mapa-direccion">
+          <span class="mapa-pin">📍</span>
+          Carr. 26, Mónaco Privada Residencial, 83285 Hermosillo, Son.
+        </p>
+      </div>
+    </div>
+    <div class="mapa-embed reveal-up">
+      <iframe
+        src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d518.5376273232362!2d-111.00096004831255!3d29.037959459088537!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1ses-419!2smx!4v1779959505338!5m2!1ses-419!2smx"
+        width="100%" height="420"
+        style="border:0;" allowfullscreen="" loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade"
+        title="Ubicación HCH Inmobiliaria">
+      </iframe>
+    </div>
+  </section>
+
+
+  <!-- Servicios -->
+  <section class="servicios" id="servicios">
+    <div class="container">
+      <div class="section-header reveal-up">
+        <p class="section-eyebrow">Lo que ofrecemos</p>
+        <h2 class="section-title">Servicios <em>integrales</em></h2>
+      </div>
+  
+      <div class="servicios-slider reveal-up">
+        <div class="servicios-track" id="serviciosTrack">
+
+          <div class="servicio-card" id="servicio-compra-venta">
+            <div class="servicio-icon">🏠</div>
+            <h3>Compra y Venta</h3>
+            <p>Asesoría completa en transacciones inmobiliarias residenciales y comerciales con respaldo legal.</p>
+          </div>
+
+          <div class="servicio-card" id="servicio-renta">
+            <div class="servicio-icon">🔑</div>
+            <h3>Renta de Propiedades</h3>
+            <p>Gestión integral de arrendamientos, desde la búsqueda del inquilino hasta el contrato final.</p>
+          </div>
+
+          <div class="servicio-card" id="servicio-avaluos">
+            <div class="servicio-icon">💼</div>
+            <h3>Inversión Inmobiliaria</h3>
+            <p>Identificamos las mejores oportunidades de inversión con análisis de retorno y plusvalía.</p>
+          </div>
+
+          <div class="servicio-card" id="servicio-juridica">
+            <div class="servicio-icon">🏗️</div>
+            <h3>Desarrollos Nuevos</h3>
+            <p>Acceso anticipado a preventa de desarrollos propios inmobiliarios con condiciones preferentes.</p>
+          </div>
+
+        </div>
+        <div class="slider-controls">
+          <button class="slider-btn" id="serviciosPrev">←</button>
+          <div class="slider-dots" id="serviciosDots"></div>
+          <button class="slider-btn" id="serviciosNext">→</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- Testimonios -->
+  <section class="testimonios" id="testimonios">
+    <div class="container">
+      <div class="section-header reveal-up">
+        <p class="section-eyebrow">Lo que dicen de nosotros</p>
+        <h2 class="section-title">Clientes que <em>confían</em> en HCH</h2>
+      </div>
+      <div class="testimonios-slider">
+        <div class="testimonios-track" id="testimoniosTrack">
+          <div class="testimonio-card">
+            <div class="testimonio-estrellas">★★★★★</div>
+            <p class="testimonio-texto">"HCH superó todas mis expectativas. Encontraron exactamente lo que buscaba en tiempo récord y el proceso fue transparente de principio a fin."</p>
+            <div class="testimonio-autor">
+              <div class="autor-avatar">MR</div>
+              <div><strong>Marcela Rodríguez</strong><span>Hermosillo, Sonora</span></div>
+            </div>
+          </div>
+          <div class="testimonio-card">
+            <div class="testimonio-estrellas">★★★★★</div>
+            <p class="testimonio-texto">"Vendimos nuestra propiedad en menos de 30 días. El equipo de HCH es profesional, puntual y genuinamente comprometido con sus clientes."</p>
+            <div class="testimonio-autor">
+              <div class="autor-avatar">JL</div>
+              <div><strong>Jorge López</strong><span>Hermosillo, Sonora</span></div>
+            </div>
+          </div>
+          <div class="testimonio-card">
+            <div class="testimonio-estrellas">★★★★★</div>
+            <p class="testimonio-texto">"Como inversionista, confío en HCH para identificar oportunidades. Su conocimiento del mercado sonorense es único y sus resultados hablan solos."</p>
+            <div class="testimonio-autor">
+              <div class="autor-avatar">AC</div>
+              <div><strong>Andrea Contreras</strong><span>Hermosillo, Sonora</span></div>
+            </div>
+          </div>
+          <div class="testimonio-card">
+            <div class="testimonio-estrellas">★★★★★</div>
+            <p class="testimonio-texto">"La asesoría jurídica fue invaluable. Me ayudaron a evitar problemas legales y cerramos la compra sin ningún contratiempo."</p>
+            <div class="testimonio-autor">
+              <div class="autor-avatar">FH</div>
+              <div><strong>Fernando Herrera</strong><span>Hermosillo, Sonora</span></div>
+            </div>
+          </div>
+        </div>
+        <div class="slider-controls">
+          <button class="slider-btn" id="sliderPrev">←</button>
+          <div class="slider-dots" id="sliderDots"></div>
+          <button class="slider-btn" id="sliderNext">→</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- Cta -->
+  <section class="cta-section">
+    <div class="container">
+      <div class="cta-content reveal-up">
+        <p class="section-eyebrow" style="color:var(--gold-light);">¿Listo para comenzar?</p>
+        <h2 class="cta-title">Encuentra tu propiedad <em>ideal hoy</em></h2>
+        <p class="cta-desc">Nuestros asesores están disponibles para guiarte en cada paso del proceso.</p>
+        <button class="btn-primary large" id="openContactModalCTA">Hablar con un asesor</button>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <img src="assets/LogoHCHv1.png" alt="HCH Inmobiliaria" class="footer-logo" />
+          <p>HCH Inmobiliaria Sonora S.A. de C.V.<br />Expertos en bienes raíces desde 2008.</p>
+          <div class="footer-social">
+            <a href="#" class="social-icon" aria-label="Facebook" target="_blank" rel="noopener">
+              <!-- Facebook -->
+              <svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18">
+                <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>
+              </svg>
+            </a>
+            <a href="#" class="social-icon" aria-label="Instagram" target="_blank" rel="noopener">
+              <!-- Instagram -->
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="18" height="18">
+                <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+                <circle cx="12" cy="12" r="4.5"/>
+                <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/>
+              </svg>
+            </a>
+            <a href="https://wa.me/526624649993" class="social-icon" aria-label="WhatsApp" target="_blank" rel="noopener">
+            
+  <!-- WhatsApp flotante -->
+              <svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18">
+                <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/>
+              </svg>
+            </a>
+          </div>
+        </div>
+        <div class="footer-col">
+          <h4>Navegación</h4>
+          <ul>
+            <li><a href="#nosotros">Nosotros</a></li>
+            <li><a href="#propiedades">Propiedades</a></li>
+            <li><a href="#ubicacion">Ubicación</a></li>
+            <li><a href="#servicios">Servicios</a></li>
+            <li><a href="#testimonios">Testimonios</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Servicios</h4>
+          <ul>
+            <li><a href="#servicios">Compra y Venta</a></li>
+            <li><a href="#servicios">Arrendamiento</a></li>
+            <li><a href="#servicios">Avalúos</a></li>
+            <li><a href="#servicios">Asesoría Jurídica</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Contacto</h4>
+          <ul class="footer-contact">
+            <li>📍 Hermosillo, Sonora, México</li>
+            <li>📞 <a href="tel:+526624649993">+52 662 464 9993</a></li>
+            <li>✉️ <a href="mailto:administracion@inmobiliariahchsonora.com">administracion@inmobiliariahchsonora.com</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>© 2025 HCH Inmobiliaria Sonora S.A. de C.V. Todos los derechos reservados.</p>
+        <!-- <p><a href="#">Aviso de Privacidad</a> · <a href="#">Términos de Uso</a></p> -->
+      </div>
+    </div>
+  </footer>
+
+
+  <!-- Propiedad -->
+  <div class="modal-overlay" id="propiedadModal">
+    <div class="modal modal-propiedad">
+      <button class="modal-close" id="closePropModal">✕</button>
+
+      <!-- Galería principal -->
+      <div class="modal-gallery">
+        <div class="gallery-main" id="galleryMain">
+          <div class="gallery-main-placeholder" id="galleryPlaceholder">Imagen de la propiedad</div>
+          <img class="gallery-main-img" id="galleryMainImg" src="" alt="" style="display:none;" />
+          <div class="gallery-counter" id="galleryCounter">1 / 1</div>
+          <button class="gallery-arrow prev" id="galleryPrev">‹</button>
+          <button class="gallery-arrow next" id="galleryNext">›</button>
+        </div>
+        <!-- Thumbnails -->
+        <div class="gallery-thumbs" id="galleryThumbs"></div>
+      </div>
+
+      <!-- Info -->
+      <div class="modal-prop-body">
+        <div class="modal-prop-header">
+          <p class="modal-badge-label" id="modalTipo">Casa</p>
+          <h2 class="modal-prop-nombre" id="modalNombre">—</h2>
+          <p class="modal-prop-ubicacion" id="modalUbicacion">—</p>
+          <p class="modal-prop-precio" id="modalPrecio">—</p>
+        </div>
+        <div class="modal-specs-grid">
+          <div class="modal-spec">
+            <span class="spec-icon">🛏</span>
+            <span class="spec-val" id="modalRec">—</span>
+            <span class="spec-lbl">Recámaras</span>
+          </div>
+          <div class="modal-spec">
+            <span class="spec-icon">🚿</span>
+            <span class="spec-val" id="modalBanos">—</span>
+            <span class="spec-lbl">Baños</span>
+          </div>
+          <div class="modal-spec">
+            <span class="spec-icon">📐</span>
+            <span class="spec-val" id="modalM2">—</span>
+            <span class="spec-lbl">m²</span>
+          </div>
+          <div class="modal-spec">
+            <span class="spec-icon">🅿️</span>
+            <span class="spec-val" id="modalEstac">—</span>
+            <span class="spec-lbl">Estacionam.</span>
+          </div>
+        </div>
+        <p class="modal-prop-desc" id="modalDesc">—</p>
+        <div class="modal-cta-wrap">
+          <button class="btn-primary" id="modalContactBtn">Solicitar información</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- Lightbox -->
+  <div class="lightbox" id="lightbox">
+    <button class="lightbox-close" id="lightboxClose">✕</button>
+    <button class="lightbox-arrow prev" id="lightboxPrev">‹</button>
+    <img class="lightbox-img" id="lightboxImg" src="" alt="" />
+    <button class="lightbox-arrow next" id="lightboxNext">›</button>
+    <div class="lightbox-caption" id="lightboxCaption">1 / 1</div>
+  </div>
+
+
+  <!-- Contacto -->
+  <div class="modal-overlay" id="contactModal">
+    <div class="modal modal-contacto">
+      <button class="modal-close" id="closeContactModal">✕</button>
+      <div class="contact-modal-header">
+        <img src="assets/LogoHCHv1.png" alt="HCH" class="contact-modal-logo" />
+        <h2>Hablemos de tu <em>próxima propiedad</em></h2>
+        <p>Completa el formulario y un asesor te contactará en menos de 24 horas.</p>
+      </div>
+      <form class="contact-form" id="contactForm" novalidate>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="nombre">Nombre completo *</label>
+            <input type="text" id="nombre" name="nombre" placeholder="Ej. Juan García" required />
+          </div>
+          <div class="form-group">
+            <label for="telefono">Teléfono *</label>
+            <input type="tel" id="telefono" name="telefono" placeholder="(662) 000-0000" required inputmode="numeric" pattern="[0-9\s\-\(\)\+]{7,20}" />
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="email">Correo electrónico *</label>
+          <input type="email" id="email" name="email" placeholder="tu@email.com" required />
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="interes">Me interesa</label>
+            <select id="interes" name="interes">
+              <option value="">Selecciona una opción</option>
+              <option value="comprar">Comprar</option>
+              <option value="vender">Vender</option>
+              <option value="rentar">Rentar</option>
+              <option value="invertir">Invertir</option>
+              <option value="avaluo">Avalúo</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="presupuesto">Presupuesto aproximado</label>
+            <select id="presupuesto" name="presupuesto">
+              <option value="">Selecciona rango</option>
+              <option value="menos1m">Menos de $1,000,000</option>
+              <option value="1-3m">$1,000,000 – $3,000,000</option>
+              <option value="3-6m">$3,000,000 – $6,000,000</option>
+              <option value="mas6m">Más de $6,000,000</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="mensaje">Mensaje (opcional)</label>
+          <textarea id="mensaje" name="mensaje" rows="3" placeholder="Cuéntanos qué buscas..."></textarea>
+        </div>
+
+        <input type="text" name="sitio_web" id="sitio_web" class="campo-trampa" autocomplete="off" tabindex="-1" />
+
+        <div class="form-submit-wrap">
+          <button type="submit" class="btn-primary">
+            <span class="btn-text">Enviar Mensaje</span>
+            <span class="btn-loader" style="display:none;">Enviando...</span>
+          </button>
+        </div>
+        <div class="form-success" id="formSuccess" style="display:none;">✓ Mensaje enviado. Te contactaremos pronto.</div>
+      </form>
+    </div>
+  </div>
+
+
+  <!-- WhatsApp flotante -->
+  <a href="https://wa.me/526624649993" class="whatsapp-fab" target="_blank" rel="noopener" aria-label="WhatsApp">
+    <svg viewBox="0 0 24 24" fill="currentColor" width="26" height="26">
+      <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+    </svg>
+  </a>
+
+  <script src="js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,225 @@
+/* HCH INMOBILIARIA — MEDIA QUERIES v3 */
+
+/* TABLET 1200px */
+
+@media (max-width: 1200px) {
+  .propiedades-grid { grid-template-columns: repeat(2, 1fr); }
+  .footer-grid { grid-template-columns: 1fr 1fr; gap: 2.5rem; }
+  .footer-brand { grid-column: 1 / -1; }
+  .hero-stats { gap: 2rem; padding: 1.5rem 2rem; }
+  .nav-links { gap: 1.8rem; }
+}
+
+/*  TABLET 1024px  */
+
+@media (max-width: 1024px) {
+  .nosotros-grid { grid-template-columns: 1fr; gap: 3rem; }
+  .nosotros-content { padding-right: 0; }
+  /* Imagen nosotros en tablet: menos alta para que se vea completa */
+  .about-img-placeholder { padding-top: 85%; }
+  .about-img-placeholder img { object-fit: contain; }
+  .servicios-grid { grid-template-columns: repeat(2, 1fr); }
+  /* Servicios slider en tablet: 2 cards visibles */
+  .servicios-track .servicio-card {
+    flex: 0 0 calc(50% - 0.75rem);
+    width: calc(50% - 0.75rem);
+    box-sizing: border-box;
+  }
+  .modal-specs-grid { grid-template-columns: repeat(2, 1fr); }
+  .hero-stats { flex-wrap: wrap; justify-content: center; gap: 1.5rem; }
+  .stat-divider { display: none; }
+}
+
+/* CELULAR 768px */
+
+@media (max-width: 768px) {
+  .nav-container {
+    grid-template-columns: auto 1fr auto;
+    padding: 0 1.25rem;
+  }
+
+  .nav-logo-img { height: 56px; }
+
+  .nav-links { display: none; }
+  .nav-right .nav-cta { display: none; }
+  .hamburger { display: flex; }
+
+  /* Hero móvil */
+  .hero-title { font-size: clamp(2.4rem, 7.5vw, 3.8rem); }
+  .hero-subtitle { font-size: 0.88rem; margin-bottom: 2rem; }
+  .hero-content { padding-top: 80px; padding-bottom: 0; }
+  /* Espacio para que el scroll indicator no quede cortado */
+  .hero { padding-bottom: 3.5rem; }
+  .hero-actions { flex-direction: column; align-items: center; margin-bottom: 2rem; }
+  .btn-primary, .btn-ghost { width: 100%; max-width: 280px; }
+  .hero-stats {
+    width: calc(100% - 2.5rem); margin: 0 1.25rem;
+    padding: 1.2rem 1.25rem; gap: 1rem;
+    /* En móvil: 3 stats en fila si caben, sino wrap */
+    flex-wrap: nowrap;
+    justify-content: space-around;
+  }
+  .stat-num { font-size: 1.9rem; }
+  .stat-label { font-size: 0.6rem; }
+
+  /* Secciones */
+  .nosotros { padding: 4rem 0; }
+  /* En móvil: imagen más compacta, sin tanto espacio vertical */
+  .about-img-placeholder { padding-top: 85%; }
+  .about-img-placeholder img { object-fit: contain; }
+  /* Quitar el borde decorativo en móvil (se sale del contenedor) */
+  .about-accent-line { display: none; }
+  .propiedades { padding: 5rem 0; }
+  .servicios { padding: 5rem 0; }
+  .testimonios { padding: 5rem 0; }
+  .cta-section { padding: 5rem 0; }
+
+  .propiedades-grid { grid-template-columns: 1fr; }
+  .servicios-grid { grid-template-columns: 1fr; }
+  /* Servicios slider en móvil: 1 card, ancho completo del contenedor */
+  .servicios-slider { width: 100%; overflow: hidden; }
+  .servicios-track .servicio-card {
+    flex: 0 0 100%;
+    width: 100%;
+    margin-right: 0;
+    box-sizing: border-box;
+  }
+  /* Mapa más compacto en móvil */
+  .mapa-embed iframe { height: 280px; }
+  .mapa-section { padding: 4rem 0 0; }
+
+  /* Scroll indicator: visible en móvil, tamaño reducido */
+  .hero-scroll-indicator { display: flex; opacity: 0.7; }
+
+  /* Testimonios */
+  .testimonio-texto { font-size: 1.2rem; }
+  .testimonio-card { padding: 1.75rem 0; }
+
+  /* Footer móvil — brand arriba, nav+serv en 2 cols, contacto debajo */
+  .footer-grid {
+    display: grid;
+    /* brand ocupa ancho completo, luego nav|serv, luego contacto */
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto auto auto;
+    gap: 0;
+  }
+  /* Brand: fila completa centrada */
+  .footer-brand {
+    grid-column: 1 / -1;
+    text-align: center;
+    padding-bottom: 2rem;
+    margin-bottom: 2rem;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+  }
+  .footer-brand .footer-logo { margin: 0 auto 0.85rem; }
+  .footer-brand .footer-social { justify-content: center; }
+
+  /* Nav + Servicios: 2 columnas dentro del group */
+  .footer-cols-group {
+    display: contents;
+  }
+  .footer-cols-group > .footer-col {
+    padding-bottom: 0;
+    border-bottom: none;
+    margin-bottom: 0;
+  }
+
+  /* Contacto: fila completa con separador arriba */
+  .footer-grid > .footer-col:last-child {
+    grid-column: 1 / -1;
+    padding-top: 2rem;
+    margin-top: 2rem;
+    border-top: 1px solid rgba(255,255,255,0.06);
+    padding-bottom: 0.5rem;
+  }
+
+  .footer-bottom { flex-direction: column; text-align: center; gap: 0.4rem; }
+
+  /* Modal propiedad — bottom sheet */
+  .modal-propiedad { max-width: 100%; border-radius: var(--rl) var(--rl) 0 0; }
+  .modal-overlay { align-items: flex-end; padding: 0; }
+  .modal { border-radius: var(--rl) var(--rl) 0 0; max-height: 92vh; }
+  .modal-prop-body { padding: 1.4rem 1.4rem 2rem; }
+  .modal-specs-grid { grid-template-columns: repeat(2, 1fr); }
+  /* Botón X en móvil: fixed al viewport, ajustar posición */
+  .modal-close {
+    top: 0.75rem;
+    right: 0.75rem;
+    width: 32px; height: 32px;
+    font-size: 0.78rem;
+  }
+
+  /* Modal contacto */
+  .modal-contacto { padding: 2rem 1.5rem 2.5rem; }
+  .form-row { grid-template-columns: 1fr; }
+
+  /* Lightbox arrows en móvil */
+  .lightbox-arrow.prev { left: 0.75rem; }
+  .lightbox-arrow.next { right: 0.75rem; }
+
+  .container { padding: 0 1.25rem; }
+  .section-header { margin-bottom: 2.25rem; }
+  /* Evitar scroll horizontal en móvil */
+  html, body { overflow-x: hidden; overscroll-behavior-x: none; }
+  /* Drawer no provoca overflow */
+  .nav-links { max-width: 85vw; }
+}
+
+/* ── MÓVIL PEQUEÑO 480px ── */
+@media (max-width: 480px) {
+  .hero-title { font-size: 2.1rem; }
+  .hero-eyebrow { font-size: 0.58rem; letter-spacing: 0.18em; }
+  .hero-content { padding-top: 72px; }
+  .hero { padding-bottom: 3rem; }
+  .hero-subtitle { font-size: 0.84rem; margin-bottom: 1.5rem; }
+  .hero-actions { margin-bottom: 1.5rem; }
+  .hero-stats { padding: 1rem 1rem; gap: 0.75rem; }
+  .stat-num { font-size: 1.7rem; }
+  .stat-label { font-size: 0.56rem; letter-spacing: 0.1em; }
+  .hero-scroll-indicator { display: flex; opacity: 0.6; }
+
+  .card-body { padding: 1rem 1.1rem 1.25rem; }
+  .card-nombre { font-size: 1.1rem; }
+
+  .section-title { font-size: 1.75rem; }
+
+  .gallery-main { padding-top: 60%; }
+  .modal-prop-nombre { font-size: 1.5rem; }
+  .modal-prop-precio { font-size: 1.3rem; }
+  .modal-specs-grid { gap: 0.5rem; }
+
+  .footer { padding: 3rem 0 2rem; }
+  .footer-logo { height: 42px; }
+
+  .nav-logo-img { height: 50px; }
+
+  /* Bloquear scroll horizontal siempre */
+  body { overflow-x: hidden; }
+  html { overflow-x: hidden; }
+  /* Evitar rebote horizontal en iOS */
+  body { overscroll-behavior-x: none; }
+}
+
+/* ── XL 1440px+ ── */
+@media (min-width: 1440px) {
+  .container { max-width: 1340px; }
+  .propiedades-grid { grid-template-columns: repeat(3, 1fr); gap: 2rem; }
+  .hero-title { font-size: 6rem; }
+  .nav-logo-img { height: 70px; }
+}
+
+/* ── REDUCIR MOVIMIENTO ── */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  .reveal-up, .reveal-left, .reveal-right { opacity: 1; transform: none; }
+}
+
+/* ── CURSOR: ocultar en dispositivos táctiles ── */
+@media (pointer: coarse) {
+  .cursor, .cursor-follower { display: none !important; }
+  body.cursor-active, body.cursor-active a, body.cursor-active button { cursor: auto; }
+}
