@@ -252,14 +252,14 @@ body.cursor-active select { cursor: text !important; }
   text-transform: uppercase;
   color: rgba(255,255,255,0.78);
   position: relative;
-  transition: var(--tf);
+  transition: color 0.25s ease;
 }
 .nav-link::after {
   content: '';
   position: absolute; bottom: -3px; left: 0;
   width: 0; height: 1px;
   background: var(--gold-light);
-  transition: width 0.3s var(--t);
+  transition: width 0.25s ease;
 }
 .nav-link:hover { color: var(--gold-xlight); }
 .nav-link:hover::after, .nav-link.active::after { width: 100%; }
@@ -451,7 +451,7 @@ body.cursor-active select { cursor: text !important; }
 .tag:hover { background: var(--gold-subtle); }
 
 /* PROPIEDADES */
-.propiedades { padding: 7rem 0; background: var(--offwhite); }
+.propiedades { padding: 7rem 0; background: var(--offwhite); min-height: 60vh; }
 
 .filtros { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-bottom: 2.8rem; }
 .filtro-btn {
@@ -466,7 +466,7 @@ body.cursor-active select { cursor: text !important; }
 .filtro-btn:hover { color: var(--gold); border-color: var(--gold-border); }
 .filtro-btn.active { background: var(--gold); color: var(--white); border-color: var(--gold); }
 
-/* Cards */
+/* Cards — integradas, sin sombras agresivas */
 /* Próximamente */
 .proximamente {
   text-align: center;
@@ -533,7 +533,7 @@ body.cursor-active select { cursor: text !important; }
   will-change: transform;
 }
 .card-slide {
-  flex: 0 0 100%;  
+  flex: 0 0 100%;   /* exactamente 100% del ancho, sin shrink */
   width: 100%;
   height: 100%;
   position: relative;
@@ -569,7 +569,7 @@ body.cursor-active select { cursor: text !important; }
 /* Ocultar dots si solo hay 1 foto */
 .card-slider-dots:has(.cs-dot:only-child) { display: none; }
 
-/* Hover hint arrows desktop */
+/* Hover hint arrows en desktop */
 .card-slider-arrow {
   position: absolute; top: 50%; transform: translateY(-50%);
   width: 30px; height: 30px;
@@ -616,6 +616,7 @@ body.cursor-active select { cursor: text !important; }
 .servicios {
   padding: 7rem 0;
   background: var(--white);
+  /* Compensa la navbar fija al hacer scroll con deeplink */
   scroll-margin-top: 80px;
 }
 .servicios-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.35rem; }
@@ -697,13 +698,15 @@ body.cursor-active select { cursor: text !important; }
 .footer { background: #0c0b08; padding: 4rem 0 2rem; border-top: 1px solid rgba(184,146,42,0.1); }
 .footer-grid {
   display: grid;
+  /* 4 columnas iguales: brand | nav | servicios | contacto */
   grid-template-columns: 1.4fr 1fr 1fr 1.2fr;
   gap: 2.5rem;
   margin-bottom: 3rem;
   align-items: start;
 }
+/* El grupo pasa a ser invisible en desktop — cada col es directa */
 .footer-cols-group {
-  display: contents; 
+  display: contents; /* sus hijos participan directamente en el grid padre */
 }
 .footer-logo { height: 44px; margin-bottom: 1rem; }
 .footer-brand p { font-size: 0.8rem; color: rgba(255,255,255,0.28); line-height: 1.75; }
@@ -793,8 +796,9 @@ body.cursor-active select { cursor: text !important; }
 .gallery-main {
   position: relative; padding-top: 52%; overflow: hidden;
   cursor: zoom-in;
-  user-select: none; 
+  user-select: none; /* evita selección de texto al swipear */
 }
+/* Las flechas tienen su propio cursor y no propagan al lightbox */
 .gallery-arrow { cursor: pointer !important; }
 .gallery-main-img {
   position: absolute; inset: 0; width: 100%; height: 100%;
@@ -983,6 +987,7 @@ body.cursor-active select { cursor: text !important; }
 /* MENÚ MÓVIL iOS-STYLE */
 .mobile-menu {
   position: fixed;
+  /* Empieza -60px arriba del viewport para tapar la status bar */
   top: -60px;
   left: 0; right: 0;
   z-index: 1100;
@@ -998,6 +1003,7 @@ body.cursor-active select { cursor: text !important; }
 .mobile-menu-inner {
   background: #FFFFFF;
   border-radius: 0 0 24px 24px;
+  /* padding-top cubre los 60px extra + safe-area de iOS */
   padding-top: calc(60px + env(safe-area-inset-top, 0px));
   padding-left: 1.5rem;
   padding-right: 1.5rem;
@@ -1054,6 +1060,7 @@ body.cursor-active select { cursor: text !important; }
   justify-content: center;
 }
 .btn-primary.full-w {
+  /* Centrado, no ocupa todo el ancho */
   min-width: 200px;
   width: auto;
   justify-content: center;
@@ -1078,23 +1085,26 @@ body.cursor-active select { cursor: text !important; }
   .mobile-menu, .mobile-overlay { display: none !important; }
 }
 
-/* SERVICIOS SLIDER */
+/* SERVICIOS SLIDER (carrusel) */
 .servicios-slider {
   position: relative;
   overflow: hidden;
+  /* Asegurar que no haya overflow horizontal */
   width: 100%;
 }
 .servicios-track {
   display: flex;
   transition: transform 0.48s cubic-bezier(0.25, 0.46, 0.45, 0.94);
   will-change: transform;
+  /* Sin wrap para que las cards queden en fila */
   flex-wrap: nowrap;
   align-items: stretch;
 }
+/* Desktop: 3 cards visibles con gap incluido en el cálculo */
 .servicios-track .servicio-card {
   flex: 0 0 calc(33.333% - 1rem);
   width: calc(33.333% - 1rem);
-  min-width: 0;
+  min-width: 0; /* evita que el contenido empuje el ancho */
   margin-right: 1.5rem;
   box-sizing: border-box;
   opacity: 1 !important;
