@@ -1,7 +1,4 @@
-/* ============================================================
-   HCH INMOBILIARIA — JS v3
-   Sin loader · Galería con lightbox · Logo con hover
-   ============================================================ */
+/* HCH INMOBILIARIA — JS */
 
 document.addEventListener('DOMContentLoaded', () => {
 
