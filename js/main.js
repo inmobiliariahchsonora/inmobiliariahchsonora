@@ -1,4 +1,7 @@
-/* HCH INMOBILIARIA — JS */
+/* ============================================================
+   HCH INMOBILIARIA — JS v3
+   Sin loader · Galería con lightbox · Logo con hover
+   ============================================================ */
 
 document.addEventListener('DOMContentLoaded', () => {
 
@@ -150,14 +153,33 @@ const revealEls = document.querySelectorAll('.reveal-up, .reveal-left, .reveal-r
   });
 
 const statNums = document.querySelectorAll('.stat-num[data-count]');
+  const heroStatsEl = document.querySelector('.hero-stats');
+  let heroStatsReady = !heroStatsEl; /* true si no existe hero-stats */
+
+  if (heroStatsEl) {
+    /* El fade-up del hero-stats tarda 0.7s y arranca a los 0.8s (ver CSS) */
+    setTimeout(() => { heroStatsReady = true; }, 1600);
+  }
+
   const cntObs = new IntersectionObserver((entries) => {
     entries.forEach(e => {
       if (e.isIntersecting) {
-        animateCount(e.target, 0, +e.target.dataset.count, 1600);
-        cntObs.unobserve(e.target);
+        const el  = e.target;
+        const run = () => {
+          animateCount(el, 0, +el.dataset.count, 1400);
+          cntObs.unobserve(el);
+        };
+        /* Si el contador está dentro del hero, esperar a que termine su fade-in */
+        if (el.closest('.hero-stats') && !heroStatsReady) {
+          const wait = setInterval(() => {
+            if (heroStatsReady) { clearInterval(wait); run(); }
+          }, 50);
+        } else {
+          run();
+        }
       }
     });
-  }, { threshold: 0.6 });
+  }, { threshold: 0.4 });
   statNums.forEach(el => cntObs.observe(el));
 
   function animateCount(el, start, end, dur) {
@@ -532,37 +554,37 @@ const contactForm = document.getElementById('contactForm');
   }
 
   contactForm.addEventListener('submit', e => {
-    e.preventDefault();
-    if (!validateForm(contactForm)) return;
+      e.preventDefault();
+      if (!validateForm(contactForm)) return;
 
-    /* Campo trampa para bots*/
-    const trampa = contactForm.querySelector('#sitio_web');
-    if (trampa && trampa.value !== '') return;
+      /* Campo trampa para bots*/
+      const trampa = contactForm.querySelector('#sitio_web');
+      if (trampa && trampa.value !== '') return;
 
-    const btnText   = contactForm.querySelector('.btn-text');
-    const btnLoader = contactForm.querySelector('.btn-loader');
-    btnText.style.display   = 'none';
-    btnLoader.style.display = 'inline';
+      const btnText   = contactForm.querySelector('.btn-text');
+      const btnLoader = contactForm.querySelector('.btn-loader');
+      btnText.style.display   = 'none';
+      btnLoader.style.display = 'inline';
 
-    /* jsmail */
-    const SERVICE_ID  = 'service_cfph9ue';
-    const TEMPLATE_ID = 'template_ebr2ock';
+      /* jsmail */
+      const SERVICE_ID  = 'service_cfph9ue';
+      const TEMPLATE_ID = 'template_ebr2ock';
 
-    emailjs.sendForm(SERVICE_ID, TEMPLATE_ID, contactForm)
-      .then(() => {
-        btnText.style.display   = 'inline';
-        btnLoader.style.display = 'none';
-        formSuccess.style.display = 'block';
-        contactForm.reset();
-        setTimeout(() => formSuccess.style.display = 'none', 6000);
-      })
-      .catch(err => {
-        btnText.style.display   = 'inline';
-        btnLoader.style.display = 'none';
-        console.error('EmailJS error:', err);
-        alert('Hubo un error al enviar. Por favor intenta de nuevo o contáctanos directamente.');
-      });
-  });
+      emailjs.sendForm(SERVICE_ID, TEMPLATE_ID, contactForm)
+        .then(() => {
+          btnText.style.display   = 'inline';
+          btnLoader.style.display = 'none';
+          formSuccess.style.display = 'block';
+          contactForm.reset();
+          setTimeout(() => formSuccess.style.display = 'none', 6000);
+        })
+        .catch(err => {
+          btnText.style.display   = 'inline';
+          btnLoader.style.display = 'none';
+          console.error('EmailJS error:', err);
+          alert('Hubo un error al enviar. Por favor intenta de nuevo o contáctanos directamente.');
+        });
+    });
 
 (function() {
     const track    = document.getElementById('serviciosTrack');
@@ -829,7 +851,7 @@ const sectionObs = new IntersectionObserver(entries => {
         });
       }
     });
-  }, { threshold: 0.4 });
+  }, { threshold: 0.15 });
   document.querySelectorAll('section[id]').forEach(s => sectionObs.observe(s));
 
 function capitalize(s) { return s ? s[0].toUpperCase() + s.slice(1) : ''; }
