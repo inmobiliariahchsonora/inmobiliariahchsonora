@@ -7,17 +7,14 @@
   <link rel="stylesheet" href="css/styles.css" />
   <link rel="stylesheet" href="css/mediaqueries.css" />
   <link rel="icon" href="/assets/icono.png" type="image/png">
-
   <!-- EmailJS -->
   <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
   <script>emailjs.init('JZlXr-VuJau-2--WH');</script>
 </head>
-
 <body>
   <!-- Cursor -->
   <div class="cursor" id="cursor"></div>
   <div class="cursor-follower" id="cursorFollower"></div>
-
   <div class="mobile-menu" id="mobileMenu">
     <div class="mobile-menu-inner">
       <div class="mobile-menu-logo">
@@ -36,17 +33,13 @@
     </div>
   </div>
   <div class="mobile-overlay" id="mobileOverlay"></div>
-
-
   <!-- Navbar -->
   <nav class="navbar" id="navbar">
     <div class="nav-container">
-
       <!-- Logo -->
       <a href="#hero" class="nav-logo">
         <img src="assets/LogoHCHv1.png" alt="HCH Inmobiliaria" class="nav-logo-img" />
       </a>
-
       <!-- Links -->
       <ul class="nav-links" id="navLinks">
         <li><a href="#nosotros" class="nav-link">Nosotros</a></li>
@@ -55,7 +48,6 @@
         <li><a href="#servicios" class="nav-link">Servicios</a></li>
         <li><a href="#testimonios" class="nav-link">Testimonios</a></li>
       </ul>
-
       <!-- CTA y hamburger -->
       <div class="nav-right">
         <button class="nav-cta" id="openContactModal">Contáctanos</button>
@@ -63,11 +55,8 @@
           <span></span><span></span><span></span>
         </button>
       </div>
-
     </div>
   </nav>
-
-
   <!-- Hero -->
   <section class="hero" id="hero">
     <div class="hero-bg">
@@ -109,8 +98,6 @@
       <div class="scroll-line"></div>
     </div>
   </section>
-
-
   <!-- Nosotros -->
   <section class="nosotros" id="nosotros">
     <div class="container">
@@ -143,8 +130,6 @@
       </div>
     </div>
   </section>
-
-
   <!-- Propiedades -->
   <section class="propiedades" id="propiedades">
     <div class="container">
@@ -153,7 +138,6 @@
         <h2 class="section-title">Encuentra tu espacio <em>perfecto</em></h2>
         <p class="section-desc">Selección exclusiva de propiedades residenciales y comerciales en Sonora.</p>
       </div>
-
       <div class="filtros reveal-up">
         <button class="filtro-btn active" data-filter="todos">Todos</button>
         <button class="filtro-btn" data-filter="casa">Casas</button>
@@ -161,195 +145,15 @@
         <button class="filtro-btn" data-filter="terreno">Terrenos</button>
         <button class="filtro-btn" data-filter="comercial">Comercial</button>
       </div>
-
       <!-- Próximamente -->
       <div class="proximamente reveal-up">
         <h3>Próximamente</h3>
       </div>
       <div class="propiedades-grid" id="propiedadesGrid">
-      <!-- De aquí
-        <article class="propiedad-card reveal-up" data-tipo="casa"
-          data-nombre="Residencia Los Olivos"
-          data-precio="$4,500,000 MXN"
-          data-recamaras="4" data-banos="3.5" data-m2="320" data-estacionamientos="2"
-          data-descripcion="Elegante residencia en fraccionamiento privado con acabados de primera calidad, jardín, alberca y sistema de seguridad 24/7. Ubicación premium en zona residencial."
-          data-ubicacion="Hermosillo, Sonora"
-          data-fotos="assets/prop1.jpg|assets/prop1b.jpg|assets/prop1c.jpg">
-          <div class="card-img-wrap">
-            <div class="card-slider">
-              <div class="card-slides">
-                <div class="card-slide" style="background:#e8e0d0;"></div>
-                <div class="card-slide" style="background:#d4c9b8;"></div>
-                <div class="card-slide" style="background:#c8bfad;"></div>
-              </div>
-              <div class="card-slider-dots"></div>
-            </div>
-            <div class="card-badge">En Venta</div>
-          </div>
-          <div class="card-body">
-            <p class="card-ubicacion">Hermosillo, Sonora</p>
-            <h3 class="card-nombre">Residencia Los Olivos</h3>
-            <p class="card-precio">$4,500,000 <span>MXN</span></p>
-            <div class="card-specs">
-              <span>4 rec.</span><span>·</span>
-              <span>3.5 baños</span><span>·</span>
-              <span>320 m²</span>
-            </div>
-          </div>
-        </article>
-
-        <article class="propiedad-card reveal-up delay-1" data-tipo="departamento"
-          data-nombre="Torre Dorada 802"
-          data-precio="$2,200,000 MXN"
-          data-recamaras="2" data-banos="2" data-m2="95" data-estacionamientos="1"
-          data-descripcion="Moderno departamento en torre de lujo con vista panorámica a la ciudad. Amenidades de primer nivel: gimnasio, rooftop, lobby de concierge y seguridad biométrica."
-          data-ubicacion="Hermosillo, Sonora"
-          data-fotos="assets/prop2.jpg|assets/prop2b.jpg">
-          <div class="card-img-wrap">
-            <div class="card-slider">
-              <div class="card-slides">
-                <div class="card-slide" style="background:#d8d0c0;"></div>
-                <div class="card-slide" style="background:#c8c0b0;"></div>
-              </div>
-              <div class="card-slider-dots"></div>
-            </div>
-            <div class="card-badge nuevo">Nuevo</div>
-          </div>
-          <div class="card-body">
-            <p class="card-ubicacion">Hermosillo, Sonora</p>
-            <h3 class="card-nombre">Torre Dorada 802</h3>
-            <p class="card-precio">$2,200,000 <span>MXN</span></p>
-            <div class="card-specs">
-              <span>2 rec.</span><span>·</span>
-              <span>2 baños</span><span>·</span>
-              <span>95 m²</span>
-            </div>
-          </div>
-        </article>
-
-        <article class="propiedad-card reveal-up delay-2" data-tipo="casa"
-          data-nombre="Hacienda San Miguel"
-          data-precio="$6,800,000 MXN"
-          data-recamaras="5" data-banos="4" data-m2="480" data-estacionamientos="3"
-          data-descripcion="Majestuosa hacienda contemporánea con diseño arquitectónico único. Cuenta con bodega de vinos, cine privado, cuarto de servicio completo y amplio jardín."
-          data-ubicacion="Guaymas, Sonora"
-          data-fotos="assets/prop3.jpg|assets/prop3b.jpg|assets/prop3c.jpg">
-          <div class="card-img-wrap">
-            <div class="card-slider">
-              <div class="card-slides">
-                <div class="card-slide" style="background:#ccc5b0;"></div>
-                <div class="card-slide" style="background:#bfb9a5;"></div>
-                <div class="card-slide" style="background:#b3ad9a;"></div>
-              </div>
-              <div class="card-slider-dots"></div>
-            </div>
-            <div class="card-badge exclusiva">Exclusiva</div>
-          </div>
-          <div class="card-body">
-            <p class="card-ubicacion">Guaymas, Sonora</p>
-            <h3 class="card-nombre">Hacienda San Miguel</h3>
-            <p class="card-precio">$6,800,000 <span>MXN</span></p>
-            <div class="card-specs">
-              <span>5 rec.</span><span>·</span>
-              <span>4 baños</span><span>·</span>
-              <span>480 m²</span>
-            </div>
-          </div>
-        </article>
-
-        <article class="propiedad-card reveal-up" data-tipo="terreno"
-          data-nombre="Terreno Vista Mar"
-          data-precio="$1,800,000 MXN"
-          data-recamaras="—" data-banos="—" data-m2="600" data-estacionamientos="—"
-          data-descripcion="Terreno plano con vista al mar en zona de alto desarrollo. Servicios completos, escrituras en regla, acceso pavimentado. Ideal para construcción de residencia de lujo."
-          data-ubicacion="San Carlos, Sonora"
-          data-fotos="assets/prop4.jpg">
-          <div class="card-img-wrap">
-            <div class="card-slider">
-              <div class="card-slides">
-                <div class="card-slide" style="background:#ddd8c8;"></div>
-              </div>
-              <div class="card-slider-dots"></div>
-            </div>
-            <div class="card-badge">En Venta</div>
-          </div>
-          <div class="card-body">
-            <p class="card-ubicacion">San Carlos, Sonora</p>
-            <h3 class="card-nombre">Terreno Vista Mar</h3>
-            <p class="card-precio">$1,800,000 <span>MXN</span></p>
-            <div class="card-specs">
-              <span>600 m²</span><span>·</span>
-              <span>Vista al mar</span>
-            </div>
-          </div>
-        </article>
-
-        <article class="propiedad-card reveal-up delay-1" data-tipo="comercial"
-          data-nombre="Local Comercial Centro"
-          data-precio="$3,100,000 MXN"
-          data-recamaras="—" data-banos="2" data-m2="210" data-estacionamientos="4"
-          data-descripcion="Local comercial en zona de alta afluencia peatonal. Planta baja y mezzanine, bodega, 2 baños y estacionamiento privado. Ideal para restaurante, boutique o consultorio."
-          data-ubicacion="Hermosillo, Sonora"
-          data-fotos="assets/prop5.jpg|assets/prop5b.jpg">
-          <div class="card-img-wrap">
-            <div class="card-slider">
-              <div class="card-slides">
-                <div class="card-slide" style="background:#d0c8b8;"></div>
-                <div class="card-slide" style="background:#c4bca8;"></div>
-              </div>
-              <div class="card-slider-dots"></div>
-            </div>
-            <div class="card-badge">En Venta</div>
-          </div>
-          <div class="card-body">
-            <p class="card-ubicacion">Hermosillo, Sonora</p>
-            <h3 class="card-nombre">Local Comercial Centro</h3>
-            <p class="card-precio">$3,100,000 <span>MXN</span></p>
-            <div class="card-specs">
-              <span>2 baños</span><span>·</span>
-              <span>210 m²</span><span>·</span>
-              <span>4 est.</span>
-            </div>
-          </div>
-        </article>
-
-        <article class="propiedad-card reveal-up delay-2" data-tipo="departamento"
-          data-nombre="Penthouse Diamante"
-          data-precio="$5,900,000 MXN"
-          data-recamaras="3" data-banos="3" data-m2="185" data-estacionamientos="2"
-          data-descripcion="Penthouse de lujo con terraza privada de 80 m², jacuzzi exterior y vistas de 360°. Acabados de importación, cocina integral y sala de estar independiente."
-          data-ubicacion="Hermosillo, Sonora"
-          data-fotos="assets/prop6.jpg|assets/prop6b.jpg|assets/prop6c.jpg">
-          <div class="card-img-wrap">
-            <div class="card-slider">
-              <div class="card-slides">
-                <div class="card-slide" style="background:#e4dcc8;"></div>
-                <div class="card-slide" style="background:#d8d0bc;"></div>
-                <div class="card-slide" style="background:#ccc4b0;"></div>
-              </div>
-              <div class="card-slider-dots"></div>
-            </div>
-            <div class="card-badge exclusiva">Exclusiva</div>
-          </div>
-          <div class="card-body">
-            <p class="card-ubicacion">Hermosillo, Sonora</p>
-            <h3 class="card-nombre">Penthouse Diamante</h3>
-            <p class="card-precio">$5,900,000 <span>MXN</span></p>
-            <div class="card-specs">
-              <span>3 rec.</span><span>·</span>
-              <span>3 baños</span><span>·</span>
-              <span>185 m²</span>
-            </div>
-          </div>
-
-      Hasta aquí-->
-        </article>
-
       </div>
     </div>
   </section>
   
-
   <!-- Mapa -->
   <section class="mapa-section" id="ubicacion">
     <div class="container">
@@ -364,7 +168,7 @@
     </div>
     <div class="mapa-embed reveal-up">
       <iframe
-        src="https://www.google.com/maps/embed?pb=!1m13!1m8!1m3!1d3488.281128502151!2d-111.0032469!3d29.038265!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zMjnCsDAyJzE3LjgiTiAxMTHCsDAwJzAyLjQiVw!5e0!3m2!1ses-419!2smx!4v1782364327813!5m2!1ses-419!2smx"
+        src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d518.5376273232362!2d-111.00096004831255!3d29.037959459088537!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1ses-419!2smx!4v1779959505338!5m2!1ses-419!2smx"
         width="100%" height="420"
         style="border:0;" allowfullscreen="" loading="lazy"
         referrerpolicy="no-referrer-when-downgrade"
@@ -372,8 +176,6 @@
       </iframe>
     </div>
   </section>
-
-
   <!-- Servicios -->
   <section class="servicios" id="servicios">
     <div class="container">
@@ -384,31 +186,26 @@
   
       <div class="servicios-slider reveal-up">
         <div class="servicios-track" id="serviciosTrack">
-
           <div class="servicio-card" id="servicio-compra-venta">
             <div class="servicio-icon">🏠</div>
             <h3>Compra y Venta</h3>
             <p>Asesoría completa en transacciones inmobiliarias residenciales y comerciales con respaldo legal.</p>
           </div>
-
           <div class="servicio-card" id="servicio-renta">
             <div class="servicio-icon">🔑</div>
             <h3>Renta de Propiedades</h3>
             <p>Gestión integral de arrendamientos, desde la búsqueda del inquilino hasta el contrato final.</p>
           </div>
-
           <div class="servicio-card" id="servicio-avaluos">
             <div class="servicio-icon">💼</div>
             <h3>Inversión Inmobiliaria</h3>
             <p>Identificamos las mejores oportunidades de inversión con análisis de retorno y plusvalía.</p>
           </div>
-
           <div class="servicio-card" id="servicio-juridica">
             <div class="servicio-icon">🏗️</div>
             <h3>Desarrollos Nuevos</h3>
             <p>Acceso anticipado a preventa de desarrollos propios inmobiliarios con condiciones preferentes.</p>
           </div>
-
         </div>
         <div class="slider-controls">
           <button class="slider-btn" id="serviciosPrev">←</button>
@@ -418,8 +215,6 @@
       </div>
     </div>
   </section>
-
-
   <!-- Testimonios -->
   <section class="testimonios" id="testimonios">
     <div class="container">
@@ -470,8 +265,6 @@
       </div>
     </div>
   </section>
-
-
   <!-- Cta -->
   <section class="cta-section">
     <div class="container">
@@ -483,8 +276,6 @@
       </div>
     </div>
   </section>
-
-
   <!-- Footer -->
   <footer class="footer">
     <div class="container">
@@ -508,8 +299,7 @@
               </svg>
             </a>
             <a href="https://wa.me/526624649993" class="social-icon" aria-label="WhatsApp" target="_blank" rel="noopener">
-            
-  <!-- WhatsApp flotante -->
+              <!-- WhatsApp -->
               <svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18">
                 <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/>
               </svg>
@@ -546,17 +336,13 @@
       </div>
       <div class="footer-bottom">
         <p>© 2026 HCH Inmobiliaria Sonora S.A. de C.V. Todos los derechos reservados.</p>
-        <!-- <p><a href="#">Aviso de Privacidad</a> · <a href="#">Términos de Uso</a></p> -->
       </div>
     </div>
   </footer>
-
-
   <!-- Propiedad -->
   <div class="modal-overlay" id="propiedadModal">
     <div class="modal modal-propiedad">
       <button class="modal-close" id="closePropModal">✕</button>
-
       <!-- Galería principal -->
       <div class="modal-gallery">
         <div class="gallery-main" id="galleryMain">
@@ -569,7 +355,6 @@
         <!-- Thumbnails -->
         <div class="gallery-thumbs" id="galleryThumbs"></div>
       </div>
-
       <!-- Info -->
       <div class="modal-prop-body">
         <div class="modal-prop-header">
@@ -607,8 +392,6 @@
       </div>
     </div>
   </div>
-
-
   <!-- Lightbox -->
   <div class="lightbox" id="lightbox">
     <button class="lightbox-close" id="lightboxClose">✕</button>
@@ -617,8 +400,6 @@
     <button class="lightbox-arrow next" id="lightboxNext">›</button>
     <div class="lightbox-caption" id="lightboxCaption">1 / 1</div>
   </div>
-
-
   <!-- Contacto -->
   <div class="modal-overlay" id="contactModal">
     <div class="modal modal-contacto">
@@ -670,9 +451,7 @@
           <label for="mensaje">Mensaje (opcional)</label>
           <textarea id="mensaje" name="mensaje" rows="3" placeholder="Cuéntanos qué buscas..."></textarea>
         </div>
-
         <input type="text" name="sitio_web" id="sitio_web" class="campo-trampa" autocomplete="off" tabindex="-1" />
-
         <div class="form-submit-wrap">
           <button type="submit" class="btn-primary">
             <span class="btn-text">Enviar Mensaje</span>
@@ -683,15 +462,12 @@
       </form>
     </div>
   </div>
-
-
-  <!-- WhatsApp layout -->
+  <!-- WhatsApp -->
   <a href="https://wa.me/526624649993" class="whatsapp-fab" target="_blank" rel="noopener" aria-label="WhatsApp">
     <svg viewBox="0 0 24 24" fill="currentColor" width="26" height="26">
       <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
     </svg>
   </a>
-
   <script src="js/main.js"></script>
 </body>
 </html>
