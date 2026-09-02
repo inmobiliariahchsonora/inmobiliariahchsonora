@@ -1,18 +1,27 @@
-/* HCH INMOBILIARIA — JS */
+/* ============================================================
+   HCH INMOBILIARIA — JS v3
+   Sin loader · Galería con lightbox · Logo con hover
+   ============================================================ */
+
 document.addEventListener('DOMContentLoaded', () => {
+
   /* ── CURSOR PERSONALIZADO ── */
   const cursor       = document.getElementById('cursor');
   const cursorFollow = document.getElementById('cursorFollower');
+
   if (cursor && cursorFollow && window.matchMedia('(pointer: fine)').matches) {
     document.body.classList.add('cursor-active');
+
     let mouseX = 0, mouseY = 0;
     let followX = 0, followY = 0;
+
     document.addEventListener('mousemove', e => {
       mouseX = e.clientX;
       mouseY = e.clientY;
       cursor.style.left = mouseX + 'px';
       cursor.style.top  = mouseY + 'px';
     });
+
     /* Follower con lerp suave */
     (function animateFollower() {
       followX += (mouseX - followX) * 0.1;
@@ -21,15 +30,20 @@ document.addEventListener('DOMContentLoaded', () => {
       cursorFollow.style.top  = followY + 'px';
       requestAnimationFrame(animateFollower);
     })();
+
     /* Hover en elementos interactivos */
+    // Selectores de targets
     const clickTargets = 'a, button, .propiedad-card, .servicio-card, .filtro-btn, .dot, .slider-btn, .gallery-thumb, .gallery-arrow, .card-slider-arrow, .lightbox-arrow, .lightbox-close, .modal-close, .tag, .social-icon, .mobile-link, .whatsapp-fab';
     const zoomTargets  = '.gallery-main img, .gallery-main-img, .card-slide img, .lightbox-img';
+
     function setCursor(type) {
       cursor.classList.remove('hover', 'zoom');
       cursorFollow.classList.remove('hover', 'zoom');
       if (type) { cursor.classList.add(type); cursorFollow.classList.add(type); }
     }
+
     document.addEventListener('mouseover', e => {
+      // Zoom tiene prioridad: solo si NO estamos sobre una flecha
       if (e.target.closest(zoomTargets) && !e.target.closest('.gallery-arrow, .card-slider-arrow, .lightbox-arrow')) {
         setCursor('zoom');
       } else if (e.target.closest(clickTargets)) {
@@ -41,6 +55,7 @@ document.addEventListener('DOMContentLoaded', () => {
         setCursor(null);
       }
     });
+
     /* Click pulse */
     document.addEventListener('mousedown', () => {
       cursor.classList.add('click');
@@ -61,49 +76,64 @@ document.addEventListener('DOMContentLoaded', () => {
     document.querySelector('.hero-stats'),
   ];
   heroEls.forEach(el => { if (el) el.classList.remove('animate'); });
+
+  /* Pequeño delay para que el browser pinte antes de arrancar */
   requestAnimationFrame(() => {
     requestAnimationFrame(() => {
       heroEls.forEach(el => { if (el) el.classList.add('animate'); });
     });
   });
 
-  const navbar      = document.getElementById('navbar');
+  /* /* ========================================================= */
+const navbar      = document.getElementById('navbar');
   const hamburger   = document.getElementById('hamburger');
   const mobileMenu  = document.getElementById('mobileMenu');
   const mobileOverlay = document.getElementById('mobileOverlay');
+
   window.addEventListener('scroll', () => {
     navbar.classList.toggle('scrolled', window.scrollY > 50);
   }, { passive: true });
+
   let menuOpen = false;
+
   function openMobileMenu() {
     menuOpen = true;
     hamburger.classList.add('active');
     mobileMenu.classList.add('open');
+    // Mostrar overlay con pequeño delay para que la transición se vea
     requestAnimationFrame(() => {
       mobileOverlay.style.display = 'block';
       requestAnimationFrame(() => mobileOverlay.classList.add('active'));
     });
     lockScroll();
   }
+
   function closeMobileMenu() {
     menuOpen = false;
     hamburger.classList.remove('active');
     mobileMenu.classList.remove('open');
     mobileOverlay.classList.remove('active');
     unlockScroll();
+    // Ocultar overlay al terminar la transición
     mobileOverlay.addEventListener('transitionend', () => {
       if (!menuOpen) mobileOverlay.style.display = 'none';
     }, { once: true });
   }
+
   hamburger.addEventListener('click', () => {
     menuOpen ? closeMobileMenu() : openMobileMenu();
   });
+
   mobileOverlay.addEventListener('click', closeMobileMenu);
+
+  // Links del menú móvil
   document.querySelectorAll('.mobile-link').forEach(link => {
     link.addEventListener('click', () => {
       closeMobileMenu();
     });
   });
+
+  // CTA en menú móvil
   const mobileContactBtn = document.getElementById('openContactModalMobile');
   if (mobileContactBtn) {
     mobileContactBtn.addEventListener('click', () => {
@@ -112,59 +142,48 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  const revealEls = document.querySelectorAll('.reveal-up, .reveal-left, .reveal-right');
+  /* /* ========================================================= */
+const revealEls = document.querySelectorAll('.reveal-up, .reveal-left, .reveal-right');
   const revObs = new IntersectionObserver((entries) => {
     entries.forEach(e => {
       if (e.isIntersecting) { e.target.classList.add('visible'); revObs.unobserve(e.target); }
     });
   }, { threshold: 0.1, rootMargin: '0px 0px -30px 0px' });
+
   revealEls.forEach(el => {
     if (!el.closest('.hero')) revObs.observe(el);
   });
 
-  /* ── CONTADOR DE ESTADÍSTICAS ── */
+  /* Contador de estadísticas del hero
+     Arranca con animationend del hero-stats para no correr mientras está invisible */
   const statNums = document.querySelectorAll('.stat-num[data-count]');
   const heroStatsEl = document.querySelector('.hero-stats');
 
-  function startHeroCounters() {
-    statNums.forEach(el => {
-      if (el.closest('.hero-stats')) animateCount(el, 0, +el.dataset.count, 1500);
-    });
-  }
-
-  if (heroStatsEl) {
-    /* Arrancar justo cuando termina su propia animación de aparición (fadeUp) */
-    heroStatsEl.addEventListener('animationend', startHeroCounters, { once: true });
-  }
-
-  /* Contadores fuera del hero (si los hay) — se animan al entrar en pantalla */
-  const cntObs = new IntersectionObserver((entries) => {
-    entries.forEach(e => {
-      if (e.isIntersecting && !e.target.closest('.hero-stats')) {
-        animateCount(e.target, 0, +e.target.dataset.count, 1500);
-        cntObs.unobserve(e.target);
-      }
-    });
-  }, { threshold: 0.3 });
-  statNums.forEach(el => { if (!el.closest('.hero-stats')) cntObs.observe(el); });
-
-  function animateCount(el, start, end, dur) {
+  function runCounter(el) {
+    const end = +el.dataset.count;
+    const dur = 1200;
     let t0 = null;
     const step = ts => {
       if (!t0) t0 = ts;
       const p = Math.min((ts - t0) / dur, 1);
-      /* easeOutQuad: progresión más pareja, sin aplanarse al final */
-      const e = 1 - (1 - p) * (1 - p);
-      el.textContent = Math.round(start + (end - start) * e);
+      /* easeOutQuad — más lineal al final, sin pausas visibles */
+      const ease = p * (2 - p);
+      el.textContent = Math.round(end * ease);
       if (p < 1) requestAnimationFrame(step);
-      else el.textContent = end; /* asegurar valor exacto al terminar */
+      else el.textContent = end; /* garantizar el valor exacto al terminar */
     };
     requestAnimationFrame(step);
   }
 
+  if (heroStatsEl) {
+    /* Esperar a que termine el fadeUp del hero-stats antes de animar */
+    heroStatsEl.addEventListener('animationend', () => {
+      statNums.forEach(el => runCounter(el));
+    }, { once: true });
+  }
 
-
-  document.querySelectorAll('.card-slider').forEach(slider => {
+  /* /* ========================================================= */
+document.querySelectorAll('.card-slider').forEach(slider => {
     const card      = slider.closest('.propiedad-card');
     const fotosStr  = (card ? card.dataset.fotos : '') || '';
     const fotos     = fotosStr.split('|').map(s => s.trim()).filter(Boolean);
@@ -172,7 +191,10 @@ document.addEventListener('DOMContentLoaded', () => {
     const dotsWrap   = slider.querySelector('.card-slider-dots');
     const allSlides  = Array.from(slidesWrap.querySelectorAll('.card-slide'));
     const count      = allSlides.length;
+
     if (count === 0) return;
+
+    // Inyectar imágenes reales encima del color placeholder
     fotos.forEach((src, i) => {
       if (!allSlides[i]) return;
       const img = document.createElement('img');
@@ -183,7 +205,9 @@ document.addEventListener('DOMContentLoaded', () => {
       img.onerror = () => img.remove();
       allSlides[i].appendChild(img);
     });
+
     allSlides[0].classList.add('active-slide');
+
     dotsWrap.innerHTML = '';
     if (count > 1) {
       allSlides.forEach((_, i) => {
@@ -195,7 +219,9 @@ document.addEventListener('DOMContentLoaded', () => {
       dotsWrap.style.display = 'none';
     }
     const dots = dotsWrap.querySelectorAll('.cs-dot');
+
     if (count <= 1) return;
+
     ['prev','next'].forEach(dir => {
       const btn = document.createElement('button');
       btn.className = `card-slider-arrow ${dir}`;
@@ -203,7 +229,9 @@ document.addEventListener('DOMContentLoaded', () => {
       btn.setAttribute('aria-label', dir === 'prev' ? 'Anterior' : 'Siguiente');
       slider.appendChild(btn);
     });
+
     let cur = 0, autoTimer = null;
+
     function goTo(idx, resetAuto = true) {
       cur = (idx + count) % count;
       slidesWrap.style.transform = `translateX(-${cur * 100}%)`;
@@ -211,16 +239,20 @@ document.addEventListener('DOMContentLoaded', () => {
       allSlides.forEach((s, i) => s.classList.toggle('active-slide', i === cur));
       if (resetAuto) { clearInterval(autoTimer); startAuto(); }
     }
+
     function startAuto() {
       clearInterval(autoTimer);
-      autoTimer = setInterval(() => goTo(cur + 1, false), 8000);
+      autoTimer = setInterval(() => goTo(cur + 1, false), 8000); // ← cambia este número (ms) para ajustar velocidad
     }
+
     slider.addEventListener('mouseenter', () => clearInterval(autoTimer));
     slider.addEventListener('mouseleave', () => startAuto());
+
     slider.querySelector('.card-slider-arrow.prev')
       .addEventListener('click', e => { e.stopPropagation(); goTo(cur - 1); });
     slider.querySelector('.card-slider-arrow.next')
       .addEventListener('click', e => { e.stopPropagation(); goTo(cur + 1); });
+
     let tx = 0, ty = 0, swiping = false;
     slider.addEventListener('touchstart', e => {
       tx = e.touches[0].clientX; ty = e.touches[0].clientY; swiping = false;
@@ -235,10 +267,12 @@ document.addEventListener('DOMContentLoaded', () => {
       if (Math.abs(diff) > 40) { diff > 0 ? goTo(cur + 1) : goTo(cur - 1); e.stopPropagation(); }
       swiping = false;
     });
+
     startAuto();
   });
 
-  document.querySelectorAll('.filtro-btn').forEach(btn => {
+  /* /* ========================================================= */
+document.querySelectorAll('.filtro-btn').forEach(btn => {
     btn.addEventListener('click', () => {
       document.querySelectorAll('.filtro-btn').forEach(b => b.classList.remove('active'));
       btn.classList.add('active');
@@ -249,8 +283,10 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  let galleryPhotos = [];
+  /* /* ========================================================= */
+let galleryPhotos = [];
   let galleryCurrent = 0;
+
   const galleryMainImg  = document.getElementById('galleryMainImg');
   const galleryPh       = document.getElementById('galleryPlaceholder');
   const galleryCounter  = document.getElementById('galleryCounter');
@@ -258,10 +294,12 @@ document.addEventListener('DOMContentLoaded', () => {
   const galleryPrev     = document.getElementById('galleryPrev');
   const galleryNext     = document.getElementById('galleryNext');
   const galleryMain     = document.getElementById('galleryMain');
+
   function buildGallery(fotosStr) {
     galleryPhotos = fotosStr ? fotosStr.split('|').map(s => s.trim()).filter(Boolean) : [];
     galleryThumbs.innerHTML = '';
     galleryCurrent = 0;
+
     if (galleryPhotos.length === 0) {
       galleryMainImg.style.display = 'none';
       galleryPh.style.display = 'flex';
@@ -270,9 +308,11 @@ document.addEventListener('DOMContentLoaded', () => {
       galleryNext.style.display = 'none';
       return;
     }
+
     galleryPh.style.display = 'none';
     galleryPrev.style.display = galleryPhotos.length > 1 ? 'flex' : 'none';
     galleryNext.style.display = galleryPhotos.length > 1 ? 'flex' : 'none';
+
     galleryPhotos.forEach((src, i) => {
       const thumb = document.createElement('div');
       thumb.className = 'gallery-thumb' + (i === 0 ? ' active' : '');
@@ -286,11 +326,14 @@ document.addEventListener('DOMContentLoaded', () => {
       thumb.addEventListener('click', (e) => { e.stopPropagation(); goGallery(i); });
       galleryThumbs.appendChild(thumb);
     });
+
     goGallery(0);
   }
+
   function goGallery(idx) {
     galleryCurrent = (idx + galleryPhotos.length) % galleryPhotos.length;
     const src = galleryPhotos[galleryCurrent];
+
     galleryMainImg.style.opacity = '0';
     setTimeout(() => {
       if (src && !src.includes('placeholder')) {
@@ -312,6 +355,7 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     }, 120);
   }
+
   galleryPrev.addEventListener('click', (e) => {
     e.stopPropagation();
     goGallery(galleryCurrent - 1);
@@ -320,6 +364,8 @@ document.addEventListener('DOMContentLoaded', () => {
     e.stopPropagation();
     goGallery(galleryCurrent + 1);
   });
+
+  /* Touch swipe en la galería del modal */
   let gTouchX = 0, gTouchY = 0, gSwiping = false;
   galleryMain.addEventListener('touchstart', e => {
     gTouchX = e.touches[0].clientX;
@@ -331,7 +377,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const dy = gTouchY - e.touches[0].clientY;
     if (Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > 8) {
       gSwiping = true;
-      e.preventDefault();
+      e.preventDefault(); // evitar que el modal-scroll interfiera
     }
   }, { passive: false });
   galleryMain.addEventListener('touchend', e => {
@@ -342,31 +388,32 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     gSwiping = false;
   });
+
+  /* Clic SOLO en la imagen → lightbox (no en flechas ni al terminar un swipe) */
   galleryMain.addEventListener('click', (e) => {
     if (e.target.closest('.gallery-arrow')) return;
     if (gSwiping) return;
     if (galleryPhotos.length > 0) openLightbox(galleryCurrent);
   });
 
-  const lightbox     = document.getElementById('lightbox');
+  /* /* ========================================================= */
+const lightbox     = document.getElementById('lightbox');
   const lightboxImg  = document.getElementById('lightboxImg');
   const lightboxCap  = document.getElementById('lightboxCaption');
   const lightboxClose = document.getElementById('lightboxClose');
   const lightboxPrev  = document.getElementById('lightboxPrev');
   const lightboxNext  = document.getElementById('lightboxNext');
   let lbCurrent = 0;
+
   function openLightbox(idx) {
     lbCurrent = idx;
     showLightboxImg(lbCurrent);
     lightbox.classList.add('active');
-    document.body.classList.add('modal-open');
-    lockScroll();
+    /* El scroll ya está bloqueado por el modal de propiedad — no hacer nada extra */
   }
   function closeLightbox() {
     lightbox.classList.remove('active');
-    document.body.classList.remove('modal-open');
-    const anyOpen = document.querySelector('.modal-overlay.active');
-    if (!anyOpen) unlockScroll();
+    /* El scroll sigue bloqueado por el modal de propiedad — no desbloquearlo aquí */
   }
   function showLightboxImg(idx) {
     lbCurrent = (idx + galleryPhotos.length) % galleryPhotos.length;
@@ -378,10 +425,13 @@ document.addEventListener('DOMContentLoaded', () => {
       lightboxCap.textContent = `${lbCurrent + 1} / ${galleryPhotos.length}`;
     }, 100);
   }
+
   lightboxClose.addEventListener('click', closeLightbox);
   lightboxPrev.addEventListener('click', () => showLightboxImg(lbCurrent - 1));
   lightboxNext.addEventListener('click', () => showLightboxImg(lbCurrent + 1));
   lightbox.addEventListener('click', (e) => { if (e.target === lightbox) closeLightbox(); });
+
+  /* Swipe en lightbox */
   let lbTouchX = 0;
   lightbox.addEventListener('touchstart', e => { lbTouchX = e.touches[0].clientX; }, { passive: true });
   lightbox.addEventListener('touchend', e => {
@@ -389,11 +439,14 @@ document.addEventListener('DOMContentLoaded', () => {
     if (Math.abs(diff) > 50) diff > 0 ? showLightboxImg(lbCurrent + 1) : showLightboxImg(lbCurrent - 1);
   });
 
-  const propModal    = document.getElementById('propiedadModal');
+  /* /* ========================================================= */
+const propModal    = document.getElementById('propiedadModal');
   const closePropBtn = document.getElementById('closePropModal');
+
   document.querySelectorAll('.propiedad-card').forEach(card => {
     card.addEventListener('click', () => openPropModal(card));
   });
+
   function openPropModal(card) {
     document.getElementById('modalTipo').textContent     = capitalize(card.dataset.tipo);
     document.getElementById('modalNombre').textContent   = card.dataset.nombre;
@@ -404,43 +457,62 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('modalM2').textContent       = card.dataset.m2;
     document.getElementById('modalEstac').textContent    = card.dataset.estacionamientos;
     document.getElementById('modalDesc').textContent     = card.dataset.descripcion;
+
     buildGallery(card.dataset.fotos);
     openModal(propModal);
   }
+
   closePropBtn.addEventListener('click', () => closeModal(propModal));
   propModal.addEventListener('click', e => { if (e.target === propModal) closeModal(propModal); });
+
   document.getElementById('modalContactBtn').addEventListener('click', () => {
     closeModal(propModal);
     setTimeout(() => openModal(document.getElementById('contactModal')), 260);
   });
 
-  const contactModal = document.getElementById('contactModal');
+  /* /* ========================================================= */
+const contactModal = document.getElementById('contactModal');
   const closeContactBtn = document.getElementById('closeContactModal');
+
   ['openContactModal', 'openContactModalHero', 'openContactModalCTA'].forEach(id => {
     const el = document.getElementById(id);
     if (el) el.addEventListener('click', () => openModal(contactModal));
   });
+
   closeContactBtn.addEventListener('click', () => closeModal(contactModal));
   contactModal.addEventListener('click', e => { if (e.target === contactModal) closeModal(contactModal); });
 
-  /* ── Scroll lock que funciona en iOS Safari ── */
+  /* /* ========================================================= */
+/* ── Scroll lock que funciona en iOS Safari ── */
   let _scrollY = 0;
+  let _lockCount = 0; /* conteo de capas de lock activas */
+
   function lockScroll() {
-    _scrollY = window.scrollY;
-    document.body.style.position   = 'fixed';
-    document.body.style.top        = `-${_scrollY}px`;
-    document.body.style.left       = '0';
-    document.body.style.right      = '0';
-    document.body.style.overflowY  = 'scroll';
+    /* Solo guardar la posicion real la primera vez que se bloquea */
+    if (_lockCount === 0) {
+      _scrollY = window.scrollY;
+      document.body.style.position   = 'fixed';
+      document.body.style.top        = `-${_scrollY}px`;
+      document.body.style.left       = '0';
+      document.body.style.right      = '0';
+      document.body.style.overflowY  = 'scroll';
+    }
+    _lockCount++;
   }
+
   function unlockScroll() {
-    document.body.style.position  = '';
-    document.body.style.top       = '';
-    document.body.style.left      = '';
-    document.body.style.right     = '';
-    document.body.style.overflowY = '';
-    window.scrollTo({ top: _scrollY, behavior: 'instant' });
+    _lockCount = Math.max(0, _lockCount - 1);
+    /* Solo desbloquear cuando ya no queda ninguna capa activa */
+    if (_lockCount === 0) {
+      document.body.style.position  = '';
+      document.body.style.top       = '';
+      document.body.style.left      = '';
+      document.body.style.right     = '';
+      document.body.style.overflowY = '';
+      window.scrollTo({ top: _scrollY, behavior: 'instant' });
+    }
   }
+
   function openModal(modal) {
     modal.classList.add('active');
     document.body.classList.add('modal-open');
@@ -449,9 +521,11 @@ document.addEventListener('DOMContentLoaded', () => {
   function closeModal(modal) {
     modal.classList.remove('active');
     document.body.classList.remove('modal-open');
+    /* Solo desbloquear si no hay otro modal abierto */
     const anyOpen = document.querySelector('.modal-overlay.active, .lightbox.active');
     if (!anyOpen) unlockScroll();
   }
+
   document.addEventListener('keydown', e => {
     if (e.key === 'Escape') {
       if (lightbox.classList.contains('active')) { closeLightbox(); return; }
@@ -459,22 +533,28 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-  const contactForm = document.getElementById('contactForm');
+  /* /* ========================================================= */
+const contactForm = document.getElementById('contactForm');
   const formSuccess = document.getElementById('formSuccess');
+
+  /* Solo números en el campo teléfono */
   const telInput = document.getElementById('telefono');
   if (telInput) {
     telInput.addEventListener('keypress', e => {
+      // Permitir: números, backspace, tab, enter, flechas, +, -, (, ), espacio
       const allowed = /[0-9\+\-\(\)\s]/;
       if (!allowed.test(e.key) && !['Backspace','Delete','Tab','Enter','ArrowLeft','ArrowRight','ArrowUp','ArrowDown'].includes(e.key)) {
         e.preventDefault();
       }
     });
     telInput.addEventListener('paste', e => {
+      // Limpiar pegado — solo dejar números y símbolos válidos
       setTimeout(() => {
         telInput.value = telInput.value.replace(/[^0-9\+\-\(\)\s]/g, '');
       }, 0);
     });
   }
+
   contactForm.addEventListener('submit', e => {
     e.preventDefault();
     if (!validateForm(contactForm)) return;
@@ -502,22 +582,28 @@ document.addEventListener('DOMContentLoaded', () => {
       });
   });
 
-  (function() {
+(function() {
     const track    = document.getElementById('serviciosTrack');
     const dotsWrap = document.getElementById('serviciosDots');
     const prevBtn  = document.getElementById('serviciosPrev');
     const nextBtn  = document.getElementById('serviciosNext');
     if (!track) return;
+
     const origCards = Array.from(track.querySelectorAll('.servicio-card'));
     const n = origCards.length;
+
     function visibles() {
       if (window.innerWidth >= 1024) return Math.min(3, n);
       if (window.innerWidth >= 768)  return Math.min(2, n);
       return 1;
     }
+
+    // Clonar cards para el bucle infinito
     function setupClones() {
+      // Limpiar clones previos
       track.querySelectorAll('.servicio-clone').forEach(c => c.remove());
       const vis = visibles();
+      // Agregar clones al final e inicio
       for (let i = 0; i < vis; i++) {
         const cloneEnd   = origCards[i % n].cloneNode(true);
         const cloneStart = origCards[(n - 1 - i + n) % n].cloneNode(true);
@@ -527,41 +613,56 @@ document.addEventListener('DOMContentLoaded', () => {
         track.prepend(cloneStart);
       }
     }
-    let cur = 0;
+
+    let cur = 0; // índice lógico (0 = primera card real)
+
     function allCards() { return Array.from(track.querySelectorAll('.servicio-card')); }
+
     function getCardW() {
+      // En móvil: ancho del contenedor slider (1 card = 100%)
+      // En tablet/desktop: ancho de la primera card real + gap
       const vis = visibles();
       const cards = allCards();
       const realCards = cards.filter(c => !c.classList.contains('servicio-clone'));
       if (!realCards[0]) return 0;
       if (vis === 1) {
+        // Móvil: moverse exactamente el ancho del slider
         return track.parentElement.offsetWidth;
       }
-      return realCards[0].offsetWidth + 24;
+      return realCards[0].offsetWidth + 24; // card + gap (1.5rem)
     }
+
     function goTo(idx, animated = true) {
       const cards        = allCards();
       const clonesBefore = Math.round(track.querySelectorAll('.servicio-clone').length / 2);
       const realIdx      = idx + clonesBefore;
       const cardW        = getCardW();
+
       if (!animated) track.style.transition = 'none';
       track.style.transform = `translateX(-${realIdx * cardW}px)`;
       if (!animated) { track.offsetHeight; track.style.transition = ''; }
+
       cur = ((idx % n) + n) % n;
       dotsWrap.querySelectorAll('.dot').forEach((d, i) => d.classList.toggle('active', i === cur));
     }
+
+    // Detección de fin de transición → teletransportar sin animación
     track.addEventListener('transitionend', () => {
       const vis         = visibles();
       const clonesBefore = Math.round(track.querySelectorAll('.servicio-clone').length / 2);
       const cards       = allCards();
       const cardW       = cards[0] ? cards[0].offsetWidth + 24 : 0;
+
+      // Si estamos en los clones del final → volver al inicio
       if (cur === 0 && parseFloat(track.style.transform.replace('translateX(','')) < -(clonesBefore * cardW)) {
         goTo(0, false);
       }
+      // Si estamos en los clones del inicio
       if (cur === n - 1 && parseFloat(track.style.transform.replace('translateX(','')) > -((clonesBefore - 1) * cardW)) {
         goTo(n - 1, false);
       }
     });
+
     function buildDots() {
       dotsWrap.innerHTML = '';
       for (let i = 0; i < n; i++) {
@@ -572,16 +673,22 @@ document.addEventListener('DOMContentLoaded', () => {
         dotsWrap.appendChild(d);
       }
     }
+
     function next() { goTo(cur + 1); }
     function prev() { goTo(cur - 1); }
+
     prevBtn.addEventListener('click', prev);
     nextBtn.addEventListener('click', next);
+
+    // Swipe táctil
     let tx = 0;
     track.addEventListener('touchstart', e => { tx = e.touches[0].clientX; }, { passive: true });
     track.addEventListener('touchend', e => {
       const diff = tx - e.changedTouches[0].clientX;
       if (Math.abs(diff) > 50) diff > 0 ? next() : prev();
     });
+
+    // Deeplink — al hacer clic en un enlace #servicio-*
     function handleDeeplink(hash) {
       if (!hash || !hash.startsWith('#servicio-')) return;
       const target = document.getElementById(hash.slice(1));
@@ -589,6 +696,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const idx = origCards.indexOf(target);
       if (idx < 0) return;
       goTo(idx);
+      // Scroll a la sección servicios
       const section = document.getElementById('servicios');
       if (section) {
         setTimeout(() => {
@@ -597,6 +705,8 @@ document.addEventListener('DOMContentLoaded', () => {
         }, 50);
       }
     }
+
+    // Interceptar clicks en links del footer con deeplink a servicios
     document.querySelectorAll('a[href^="#servicio-"]').forEach(link => {
       link.addEventListener('click', e => {
         e.preventDefault();
@@ -607,17 +717,21 @@ document.addEventListener('DOMContentLoaded', () => {
         if (idx >= 0) goTo(idx);
         const section = document.getElementById('servicios');
         if (section) {
+          // Offset manual para compensar navbar fija (~80px)
           const y = section.getBoundingClientRect().top + window.scrollY - 80;
           window.scrollTo({ top: y, behavior: 'smooth' });
         }
       });
     });
+
     window.addEventListener('hashchange', () => handleDeeplink(window.location.hash));
     window.addEventListener('resize', () => {
       setupClones();
       buildDots();
       goTo(cur, false);
     });
+
+    // Init
     buildDots();
     setupClones();
     setTimeout(() => goTo(0, false), 50);
@@ -626,6 +740,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function validateForm(form) {
     let ok = true;
+
+    // Limpiar estilos previos y validar campos requeridos
     form.querySelectorAll('[required]').forEach(f => {
       f.style.borderColor = '';
       f.style.boxShadow   = '';
@@ -634,6 +750,8 @@ document.addEventListener('DOMContentLoaded', () => {
         ok = false;
       }
     });
+
+    // Validar email — formato correcto
     const em = form.querySelector('[type="email"]');
     if (em && em.value.trim()) {
       const emailRegex = /^[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}$/;
@@ -642,6 +760,8 @@ document.addEventListener('DOMContentLoaded', () => {
         ok = false;
       }
     }
+
+    // Validar teléfono — solo números, espacios, guiones, paréntesis y +
     const tel = form.querySelector('[type="tel"]');
     if (tel && tel.value.trim()) {
       const telClean = tel.value.replace(/[\s\-\(\)\+]/g, '');
@@ -650,8 +770,10 @@ document.addEventListener('DOMContentLoaded', () => {
         ok = false;
       }
     }
+
     return ok;
   }
+
   function markError(field, msg) {
     field.style.borderColor = '#e05555';
     field.style.boxShadow   = '0 0 0 3px rgba(224,85,85,0.12)';
@@ -663,6 +785,7 @@ document.addEventListener('DOMContentLoaded', () => {
       field.parentElement.appendChild(errEl);
     }
     if (msg) errEl.textContent = msg;
+    // Limpiar error al escribir
     field.addEventListener('input', () => {
       field.style.borderColor = '';
       field.style.boxShadow   = '';
@@ -670,12 +793,14 @@ document.addEventListener('DOMContentLoaded', () => {
     }, { once: true });
   }
 
-  const track   = document.getElementById('testimoniosTrack');
+  /* /* ========================================================= */
+const track   = document.getElementById('testimoniosTrack');
   const dotsWrap = document.getElementById('sliderDots');
   const prevBtn = document.getElementById('sliderPrev');
   const nextBtn = document.getElementById('sliderNext');
   const slides  = track ? [...track.querySelectorAll('.testimonio-card')] : [];
   let cur = 0, autoT;
+
   if (slides.length) {
     slides.forEach((_, i) => {
       const d = document.createElement('button');
@@ -684,6 +809,7 @@ document.addEventListener('DOMContentLoaded', () => {
       d.addEventListener('click', () => { goSlide(i); resetAuto(); });
       dotsWrap.appendChild(d);
     });
+
     function goSlide(i) {
       cur = (i + slides.length) % slides.length;
       track.style.transform = `translateX(-${cur * 100}%)`;
@@ -691,25 +817,35 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     function startAuto() { autoT = setInterval(() => goSlide(cur + 1), 5000); }
     function resetAuto() { clearInterval(autoT); startAuto(); }
+
     prevBtn.addEventListener('click', () => { goSlide(cur - 1); resetAuto(); });
     nextBtn.addEventListener('click', () => { goSlide(cur + 1); resetAuto(); });
+
     let tx = 0;
     track.addEventListener('touchstart', e => { tx = e.touches[0].clientX; }, { passive: true });
     track.addEventListener('touchend', e => {
       const d = tx - e.changedTouches[0].clientX;
       if (Math.abs(d) > 50) { d > 0 ? goSlide(cur + 1) : goSlide(cur - 1); resetAuto(); }
     });
+
     startAuto();
   }
 
-  document.querySelectorAll('a[href^="#"]').forEach(a => {
+  /* /* ========================================================= */
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+    const href = a.getAttribute('href');
+    /* Ignorar links vacios (#) y deeplinks de servicios (ya los maneja su propio listener) */
+    if (!href || href === '#' || href.startsWith('#servicio-')) return;
     a.addEventListener('click', function(e) {
-      const t = document.querySelector(this.getAttribute('href'));
-      if (t) { e.preventDefault(); t.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
+      const t = document.querySelector(href);
+      if (!t) return;
+      e.preventDefault();
+      const navH = document.getElementById('navbar')?.offsetHeight || 80;
+      const y = t.getBoundingClientRect().top + window.scrollY - navH;
+      window.scrollTo({ top: y, behavior: 'smooth' });
     });
   });
 
-  /* SECCIÓN ACTIVA EN NAVBAR */
   const sectionRatios = new Map();
   const navLinksAll = document.querySelectorAll('.nav-link');
 
@@ -719,11 +855,10 @@ document.addEventListener('DOMContentLoaded', () => {
     sectionRatios.forEach((ratio, id) => {
       if (ratio > bestRatio) { bestRatio = ratio; bestId = id; }
     });
-    if (bestId && bestRatio > 0) {
-      navLinksAll.forEach(a => {
-        a.classList.toggle('active', a.getAttribute('href') === `#${bestId}`);
-      });
-    }
+    if (!bestId || bestRatio === 0) return;
+    navLinksAll.forEach(a => {
+      a.classList.toggle('active', a.getAttribute('href') === `#${bestId}`);
+    });
   }
 
   const sectionObs = new IntersectionObserver(entries => {
@@ -731,9 +866,13 @@ document.addEventListener('DOMContentLoaded', () => {
       sectionRatios.set(e.target.id, e.isIntersecting ? e.intersectionRatio : 0);
     });
     updateActiveLink();
-  }, { threshold: [0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1] });
-
+  }, {
+    rootMargin: '-80px 0px 0px 0px',
+    threshold: [0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3, 0.35, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1]
+  });
   document.querySelectorAll('section[id]').forEach(s => sectionObs.observe(s));
 
-  function capitalize(s) { return s ? s[0].toUpperCase() + s.slice(1) : ''; }
+  /* /* ========================================================= */
+function capitalize(s) { return s ? s[0].toUpperCase() + s.slice(1) : ''; }
+
 });
