@@ -130,6 +130,7 @@
       </div>
     </div>
   </section>
+  
   <!-- Propiedades -->
   <section class="propiedades" id="propiedades">
     <div class="container">
@@ -145,11 +146,75 @@
         <button class="filtro-btn" data-filter="terreno">Terrenos</button>
         <button class="filtro-btn" data-filter="comercial">Comercial</button>
       </div>
-      <!-- Próximamente -->
-      <div class="proximamente reveal-up">
-        <h3>Próximamente</h3>
-      </div>
       <div class="propiedades-grid" id="propiedadesGrid">
+        
+        <article class="propiedad-card reveal-up delay-1" data-tipo="departamento"
+          data-nombre="Departamento en Colonia San Juan, 16-N"
+          data-precio="$11,500 MXN"
+          data-recamaras="2" data-banos="1" data-m2="-" data-estacionamientos="1"
+          data-descripcion="Departamento en renta muy cerca del centro de la ciudad, galerías Mall, centro de gobierno, universidad kino, etc. Dos recámaras con minisplit cada una, baño, cocina equipada, sala/comedor con minisplit, área común, incluye agua, un cajón de estacionamiento con portón eléctrico para mayor seguridad cuenta con cámaras de vigilancia. "
+          data-ubicacion="Hermosillo, Sonora"
+          data-fotos="assets/dpto1a.jpg|assets/dpto1b.jpg|assets/dpto1c.jpg|assets/dpto1d.jpg|assets/dpto1e.jpg|assets/dpto1f.jpg|assets/dpto1g.jpg|assets/dpto1h.jpg|assets/dpto1i.jpg">
+          <div class="card-img-wrap">
+            <div class="card-slider">
+              <div class="card-slides">
+                <div class="card-slide" style="background:#d8d0c0;"></div>
+                <div class="card-slide" style="background:#c8c0b0;"></div>
+                <div class="card-slide" style="background:#d8d0c0;"></div>
+                <div class="card-slide" style="background:#c8c0b0;"></div>
+                <div class="card-slide" style="background:#d8d0c0;"></div>
+                <div class="card-slide" style="background:#c8c0b0;"></div>
+                <div class="card-slide" style="background:#d8d0c0;"></div>
+                <div class="card-slide" style="background:#c8c0b0;"></div>
+                <div class="card-slide" style="background:#d8d0c0;"></div>
+              </div>
+              <div class="card-slider-dots"></div>
+            </div>
+            <div class="card-badge nuevo">Nuevo</div>
+          </div>
+          <div class="card-body">
+            <p class="card-ubicacion">Colonia San Juan, HMO Sonora</p>
+            <h3 class="card-nombre">Departamento en Colonia San Juan, 16-N</h3>
+            <p class="card-precio">$11,500 <span>MXN</span></p>
+            <div class="card-specs">
+              <span>2 rec.</span><span>·</span>
+              <span>1 baños</span><span>·</span>
+              <span>1 estac. </span>
+            </div>
+          </div>
+        </article>
+
+
+        <article class="propiedad-card reveal-up" data-tipo="terreno"
+          data-nombre="El Sahuaro, 83635 Heroica Caborca, Son."
+          data-precio="$5,900,000 MXN"
+          data-recamaras="—" data-banos="—" data-m2="7,380" data-estacionamientos="—"
+          data-descripcion="Terreno en Parque industrial de Caborca Sonora, servicios completos, escrituras en regla, acceso pavimentado, ideal para construcción."
+          data-ubicacion="Caborca Sonora"
+          data-fotos="assets/terreno1.jpg|assets/terreno2.jpg|assets/terreno3.jpg">
+          <div class="card-img-wrap">
+            <div class="card-slider">
+              <div class="card-slides">
+                <div class="card-slide" style="background:#ddd8c8;"></div>
+                <div class="card-slide" style="background:#c8c0b0;"></div>
+                <div class="card-slide" style="background:#ddd8c8;"></div>
+              </div>
+              <div class="card-slider-dots"></div>
+            </div>
+            <div class="card-badge nuevo">Nuevo</div>
+          </div>
+          <div class="card-body">
+            <p class="card-ubicacion">El Sahuaro, 83635 Heroica Caborca, Son.</p>
+            <h3 class="card-nombre">Terreno en Parque industrial de Caborca Sonora</h3>
+            <p class="card-precio">$5,900,000 <span>MXN</span></p>
+            <div class="card-specs">
+              <span>7,380 m²</span><span>·</span>
+              <span>Terreno</span>
+            </div>
+          </div>
+        </article>
+        </div>
+      </div>
       </div>
     </div>
   </section>
@@ -167,13 +232,7 @@
       </div>
     </div>
     <div class="mapa-embed reveal-up">
-      <iframe
-        src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d518.5376273232362!2d-111.00096004831255!3d29.037959459088537!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1ses-419!2smx!4v1779959505338!5m2!1ses-419!2smx"
-        width="100%" height="420"
-        style="border:0;" allowfullscreen="" loading="lazy"
-        referrerpolicy="no-referrer-when-downgrade"
-        title="Ubicación HCH Inmobiliaria">
-      </iframe>
+      <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d1804.6522817898917!2d-111.001100279503!3d29.03851151187928!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x86ce83006de4df8d%3A0xd7b181f6a9bc625a!2sInmobiliaria%20HCH%20Sonora!5e1!3m2!1ses-419!2smx!4v1788306089506!5m2!1ses-419!2smx" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="strict-origin-when-cross-origin"></iframe>
     </div>
   </section>
   <!-- Servicios -->
@@ -335,10 +394,16 @@
         </div>
       </div>
       <div class="footer-bottom">
-        <p>© 2026 HCH Inmobiliaria Sonora S.A. de C.V. Todos los derechos reservados.</p>
+        <p>© 2026 Inmobiliaria HCH Sonora S.A. de C.V. Todos los derechos reservados.</p>
+        <p>
+          <a href="terminos.html">Términos de Uso</a>
+          &nbsp;·&nbsp;
+          <a href="privacidad.html">Política de Privacidad</a>
+        </p>
       </div>
     </div>
   </footer>
+  
   <!-- Propiedad -->
   <div class="modal-overlay" id="propiedadModal">
     <div class="modal modal-propiedad">
