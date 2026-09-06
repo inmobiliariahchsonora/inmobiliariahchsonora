@@ -366,14 +366,18 @@ body.cursor-active select { cursor: text !important; }
   object-position: center;
   border-radius: var(--rl);
 }
-.about-img-placeholder::after {
-  content: '';
+.about-img-placeholder video {
   position: absolute; inset: 0;
-  background-image: url('../assets/LogoHCHv1sinfondo.png');
-  background-size: contain;     
-  background-repeat: no-repeat;
-  background-position: center;
+  width: 100%; height: 100%;
+  object-fit: cover;
+  object-position: center;
+  border-radius: var(--rl);
+  display: block;
+  background: var(--surface2);
 }
+/* El video no debe mostrar controles ni permitir que el usuario los saque con clic derecho */
+.about-img-placeholder video::-webkit-media-controls { display: none !important; }
+.about-img-placeholder video::-webkit-media-controls-enclosure { display: none !important; }
 .about-accent-line {
   position: absolute; top: 1.4rem; right: -1.4rem;
   width: calc(100% - 2.8rem); height: calc(100% - 2.8rem);
@@ -521,6 +525,23 @@ body.cursor-active select { cursor: text !important; }
 }
 .card-badge.nuevo { background: var(--gold); color: var(--white); border-color: var(--gold); }
 .card-badge.exclusiva { background: var(--ink); color: var(--gold-xlight); border-color: transparent; }
+/* Botón compartir — tarjeta de propiedad */
+.card-share-btn {
+  position: absolute; top: 0.85rem; right: 0.85rem;
+  width: 26px; height: 26px;
+  background: rgba(255,255,255,0.92);
+  backdrop-filter: blur(6px);
+  border: 1px solid var(--gold-border);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  color: var(--ink);
+  z-index: 5;
+  cursor: pointer;
+  transition: var(--t);
+  box-shadow: 0 1px 5px rgba(0,0,0,0.12);
+}
+.card-share-btn svg { width: 12px; height: 12px; }
+.card-share-btn:hover { background: var(--gold); color: var(--white); border-color: var(--gold); transform: translateY(-1px); }
 .card-body { padding: 1.25rem 1.35rem 1.5rem; }
 .card-ubicacion { font-size: 0.68rem; color: var(--ink-faint); letter-spacing: 0.06em; margin-bottom: 0.35rem; }
 .card-nombre { font-family: var(--font-disp); font-size: 1.18rem; font-weight: 500; color: var(--ink); margin-bottom: 0.55rem; line-height: 1.3; }
@@ -760,7 +781,62 @@ body.cursor-active select { cursor: text !important; }
 .spec-val { font-weight: 700; color: var(--ink); font-size: 0.9rem; display: block; }
 .spec-lbl { font-size: 0.58rem; color: var(--ink-soft); text-transform: uppercase; letter-spacing: 0.08em; }
 .modal-prop-desc { font-size: 0.86rem; line-height: 1.75; color: var(--ink-mid); margin-bottom: 1.6rem; padding-top: 1.1rem; border-top: 1px solid var(--line); }
-.modal-cta-wrap { display: flex; justify-content: center; }
+/* Mapa de ubicación dentro del modal de propiedad */
+.modal-mapa-wrap { margin-bottom: 1.6rem; }
+.modal-mapa-label {
+  display: flex; align-items: center; gap: 0.35rem;
+  font-size: 0.62rem; font-weight: 700; letter-spacing: 0.18em;
+  text-transform: uppercase; color: var(--ink-soft);
+  margin-bottom: 0.75rem;
+}
+.modal-mapa-label .mapa-pin { font-size: 0.85rem; }
+.modal-mapa-embed {
+  width: 100%;
+  border-radius: var(--r);
+  overflow: hidden;
+  border: 1px solid var(--line);
+}
+.modal-mapa-embed iframe {
+  display: block;
+  width: 100%;
+  height: 230px;
+}
+.modal-cta-wrap { display: flex; justify-content: center; align-items: center; gap: 0.8rem; flex-wrap: wrap; }
+/* Botón compartir — modal de propiedad */
+.btn-secondary {
+  display: inline-flex; align-items: center; justify-content: center; gap: 0.45rem;
+  padding: 0.82rem 1.7rem;
+  background: transparent;
+  border: 1.5px solid var(--gold-border);
+  color: var(--gold);
+  font-family: var(--font-ui);
+  font-size: 0.76rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  border-radius: var(--rfull);
+  transition: var(--t);
+  cursor: pointer;
+  white-space: nowrap;
+}
+.btn-secondary svg { width: 14px; height: 14px; flex-shrink: 0; }
+.btn-secondary:hover { background: var(--gold); color: var(--white); border-color: var(--gold); }
+/* Aviso flotante de "enlace copiado" */
+.share-toast {
+  position: fixed;
+  bottom: 1.6rem; left: 50%;
+  transform: translateX(-50%) translateY(16px);
+  background: var(--ink); color: var(--white);
+  padding: 0.75rem 1.4rem;
+  border-radius: var(--rfull);
+  font-size: 0.78rem; letter-spacing: 0.02em;
+  z-index: 5000;
+  opacity: 0; pointer-events: none;
+  transition: opacity 0.25s ease, transform 0.25s ease;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.28);
+  max-width: 90vw; text-align: center;
+}
+.share-toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
 .lightbox {
   position: fixed; inset: 0;
   background: rgba(0,0,0,0.95);

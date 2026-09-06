@@ -153,6 +153,13 @@
   .modal-contacto { padding: 2rem 1.5rem 2.5rem; }
   .form-row { grid-template-columns: 1fr; }
 
+  /* Modal propiedad — CTA + compartir apilados en móvil */
+  .modal-cta-wrap { flex-direction: column-reverse; }
+  .modal-cta-wrap .btn-primary,
+  .modal-cta-wrap .btn-secondary { width: 100%; }
+  /* Mapa del modal más compacto en móvil (el modal es un bottom-sheet con altura limitada) */
+  .modal-mapa-embed iframe { height: 190px; }
+
   /* Lightbox arrows en móvil */
   .lightbox-arrow.prev { left: 0.75rem; }
   .lightbox-arrow.next { right: 0.75rem; }
