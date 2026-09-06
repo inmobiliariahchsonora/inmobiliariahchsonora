@@ -5,6 +5,22 @@
 
 document.addEventListener('DOMContentLoaded', () => {
 
+  /* ── VIDEO SECCIÓN NOSOTROS: autoplay muteado en bucle ── */
+  const aboutVideo = document.querySelector('.about-video');
+  if (aboutVideo) {
+    aboutVideo.muted = true; /* refuerza el atributo muted por si el navegador lo ignora */
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (!prefersReducedMotion) {
+      const tryPlay = () => aboutVideo.play().catch(() => {});
+      tryPlay();
+      /* algunos navegadores (Safari/iOS) bloquean el primer intento; reintenta al primer toque */
+      document.addEventListener('touchstart', tryPlay, { once: true, passive: true });
+      document.addEventListener('click', tryPlay, { once: true });
+    } else {
+      aboutVideo.pause();
+    }
+  }
+
   /* ── CURSOR PERSONALIZADO ── */
   const cursor       = document.getElementById('cursor');
   const cursorFollow = document.getElementById('cursorFollower');
@@ -442,12 +458,24 @@ const lightbox     = document.getElementById('lightbox');
   /* /* ========================================================= */
 const propModal    = document.getElementById('propiedadModal');
   const closePropBtn = document.getElementById('closePropModal');
+  let currentPropCard = null; /* propiedad actualmente abierta en el modal, para el botón compartir */
 
   document.querySelectorAll('.propiedad-card').forEach(card => {
     card.addEventListener('click', () => openPropModal(card));
+
+    /* Botón compartir de la tarjeta (preview) — funciona igual para todas las propiedades,
+       solo depende del data-id de cada <article class="propiedad-card"> */
+    const cardShareBtn = card.querySelector('.card-share-btn');
+    if (cardShareBtn) {
+      cardShareBtn.addEventListener('click', e => {
+        e.stopPropagation(); /* evita que también se abra el modal */
+        shareProperty(card);
+      });
+    }
   });
 
   function openPropModal(card) {
+    currentPropCard = card;
     document.getElementById('modalTipo').textContent     = capitalize(card.dataset.tipo);
     document.getElementById('modalNombre').textContent   = card.dataset.nombre;
     document.getElementById('modalUbicacion').textContent= '📍 ' + card.dataset.ubicacion;
@@ -457,6 +485,17 @@ const propModal    = document.getElementById('propiedadModal');
     document.getElementById('modalM2').textContent       = card.dataset.m2;
     document.getElementById('modalEstac').textContent    = card.dataset.estacionamientos;
     document.getElementById('modalDesc').textContent     = card.dataset.descripcion;
+
+    /* Mapa de ubicación — solo se muestra si la propiedad trae data-mapa configurado */
+    const mapaWrap    = document.getElementById('modalMapaWrap');
+    const mapaIframe  = document.getElementById('modalMapaIframe');
+    if (card.dataset.mapa) {
+      mapaIframe.src = card.dataset.mapa;
+      mapaWrap.style.display = '';
+    } else {
+      mapaIframe.src = ''; /* evita que siga cargando un mapa que ya no aplica */
+      mapaWrap.style.display = 'none';
+    }
 
     buildGallery(card.dataset.fotos);
     openModal(propModal);
@@ -469,6 +508,85 @@ const propModal    = document.getElementById('propiedadModal');
     closeModal(propModal);
     setTimeout(() => openModal(document.getElementById('contactModal')), 260);
   });
+
+  /* Botón compartir dentro del modal (propiedad ya abierta) */
+  const modalShareBtn = document.getElementById('modalShareBtn');
+  if (modalShareBtn) {
+    modalShareBtn.addEventListener('click', () => {
+      if (currentPropCard) shareProperty(currentPropCard);
+    });
+  }
+
+  /* ── COMPARTIR PROPIEDAD ──────────────────────────────────────
+     Una sola función para todas las propiedades: arma un link con
+     ?propiedad=<data-id>, usa el share nativo del celular si existe
+     y si no, copia el link al portapapeles. Al abrir ese link, el
+     visitante es redirigido directo a esa propiedad (ver checkSharedProperty). */
+  function getPropertyShareUrl(id) {
+    const url = new URL(window.location.href);
+    url.search = ''; /* limpiar otros parámetros previos */
+    url.hash = '';
+    url.searchParams.set('propiedad', id);
+    return url.toString();
+  }
+
+  function shareProperty(card) {
+    const id = card.dataset.id;
+    if (!id) return; /* esta propiedad no tiene data-id configurado */
+    const nombre = card.dataset.nombre || 'Propiedad';
+    const precio = card.dataset.precio || '';
+    const url    = getPropertyShareUrl(id);
+
+    if (navigator.share) {
+      navigator.share({
+        title: nombre,
+        text: precio ? `${nombre} — ${precio}` : nombre,
+        url
+      }).catch(() => { /* usuario canceló el share, no hacer nada */ });
+    } else if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(url)
+        .then(() => showShareToast('Enlace copiado al portapapeles'))
+        .catch(() => showShareToast(url));
+    } else {
+      showShareToast(url);
+    }
+  }
+
+  let shareToastTimer = null;
+  function showShareToast(msg) {
+    let toast = document.getElementById('shareToast');
+    if (!toast) {
+      toast = document.createElement('div');
+      toast.id = 'shareToast';
+      toast.className = 'share-toast';
+      document.body.appendChild(toast);
+    }
+    toast.textContent = msg;
+    toast.classList.add('show');
+    clearTimeout(shareToastTimer);
+    shareToastTimer = setTimeout(() => toast.classList.remove('show'), 2600);
+  }
+
+  /* Si la URL trae ?propiedad=ID (viene de un link compartido), llevar al
+     visitante directo a la sección de propiedades y abrir esa tarjeta,
+     sin que la página se quede mostrando el hero primero. */
+  function checkSharedProperty() {
+    const params = new URLSearchParams(window.location.search);
+    const id = params.get('propiedad');
+    if (!id) return;
+    const card = document.querySelector(`.propiedad-card[data-id="${CSS.escape(id)}"]`);
+    if (!card) return;
+    /* El sitio tiene scroll-behavior: smooth por CSS; lo anulamos un instante
+       para que el salto a la propiedad sea inmediato y no se vea el hero de paso */
+    const htmlEl = document.documentElement;
+    const prevScrollBehavior = htmlEl.style.scrollBehavior;
+    htmlEl.style.scrollBehavior = 'auto';
+    card.scrollIntoView({ block: 'center', behavior: 'auto' });
+    htmlEl.style.scrollBehavior = prevScrollBehavior;
+    /* Pequeño respiro solo para que el modal abra con su transición normal */
+    setTimeout(() => openPropModal(card), 200);
+  }
+  checkSharedProperty();
 
   /* /* ========================================================= */
 const contactModal = document.getElementById('contactModal');
@@ -517,6 +635,14 @@ const contactModal = document.getElementById('contactModal');
     modal.classList.add('active');
     document.body.classList.add('modal-open');
     lockScroll();
+    /* Cada vez que se abre el formulario de contacto, arrancar limpio:
+       por si la última vez se había cambiado a la lista de rangos de renta */
+    if (modal.id === 'contactModal') {
+      const interesEl = document.getElementById('interes');
+      if (interesEl && interesEl.value !== 'rentar') {
+        setPresupuestoOptions(PRESUPUESTO_COMPRA);
+      }
+    }
   }
   function closeModal(modal) {
     modal.classList.remove('active');
@@ -555,6 +681,50 @@ const contactForm = document.getElementById('contactForm');
     });
   }
 
+  /* "Me interesa" → ajusta las opciones de "Presupuesto" según lo que elijan.
+     Si eligen "Rentar", el presupuesto pasa a ser un rango mensual de renta
+     en vez del rango de precio de compra. No afecta el envío por EmailJS:
+     al enviar, el formulario solo toma el valor que esté seleccionado en
+     ese momento en el <select>, sin importar qué lista de opciones tenga. */
+  const interesSelect     = document.getElementById('interes');
+  const presupuestoSelect = document.getElementById('presupuesto');
+
+  const PRESUPUESTO_COMPRA = [
+    { value: '', label: 'Selecciona rango', disabled: true, selected: true },
+    { value: 'menos1m', label: 'Menos de $1,000,000' },
+    { value: '1-3m',    label: '$1,000,000 – $3,000,000' },
+    { value: '3-6m',    label: '$3,000,000 – $6,000,000' },
+    { value: 'mas6m',   label: 'Más de $6,000,000' },
+    { value: 'otro',    label: 'Otro' },
+  ];
+  const PRESUPUESTO_RENTA = [
+    { value: '', label: 'Selecciona rango', disabled: true, selected: true },
+    { value: 'menos8k', label: 'Menos de $8,000/mes' },
+    { value: '8-12k',   label: '$8,000 – $12,000/mes' },
+    { value: '12-18k',  label: '$12,000 – $18,000/mes' },
+    { value: 'mas18k',  label: 'Más de $18,000/mes' },
+    { value: 'otro',    label: 'Otro' },
+  ];
+
+  function setPresupuestoOptions(lista) {
+    if (!presupuestoSelect) return;
+    presupuestoSelect.innerHTML = '';
+    lista.forEach(opt => {
+      const el = document.createElement('option');
+      el.value = opt.value;
+      el.textContent = opt.label;
+      if (opt.disabled) el.disabled = true;
+      if (opt.selected) el.selected = true;
+      presupuestoSelect.appendChild(el);
+    });
+  }
+
+  if (interesSelect && presupuestoSelect) {
+    interesSelect.addEventListener('change', () => {
+      setPresupuestoOptions(interesSelect.value === 'rentar' ? PRESUPUESTO_RENTA : PRESUPUESTO_COMPRA);
+    });
+  }
+
   contactForm.addEventListener('submit', e => {
     e.preventDefault();
     if (!validateForm(contactForm)) return;
@@ -572,6 +742,7 @@ const contactForm = document.getElementById('contactForm');
         btnLoader.style.display = 'none';
         formSuccess.style.display = 'block';
         contactForm.reset();
+        setPresupuestoOptions(PRESUPUESTO_COMPRA); /* vuelve al listado de compra por si se había cambiado a renta */
         setTimeout(() => formSuccess.style.display = 'none', 6000);
       })
       .catch(err => {
