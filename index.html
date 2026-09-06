@@ -104,7 +104,19 @@
       <div class="nosotros-grid">
         <div class="nosotros-media reveal-left">
           <div class="about-img-wrap">
-            <div class="about-img-placeholder"></div>
+            <div class="about-img-placeholder">
+              <video
+                class="about-video"
+                src="assets/inmobiliariaHCHsonora.mp4"
+                autoplay
+                muted
+                loop
+                playsinline
+                webkit-playsinline
+                disablepictureinpicture
+                preload="auto">
+              </video>
+            </div>
             <div class="about-accent-line"></div>
           </div>
         </div>
@@ -147,14 +159,16 @@
         <button class="filtro-btn" data-filter="comercial">Comercial</button>
       </div>
       <div class="propiedades-grid" id="propiedadesGrid">
-        
-        <article class="propiedad-card reveal-up delay-1" data-tipo="departamento"
-          data-nombre="Departamento en Colonia San Juan, 16-N"
+
+        <article class="propiedad-card reveal-up delay-2" data-tipo="departamento"
+          data-id="dpto-san-juan-16g"
+          data-nombre="Departamento en Colonia San Juan, 16-G"
           data-precio="$11,500 MXN"
-          data-recamaras="2" data-banos="1" data-m2="-" data-estacionamientos="1"
+          data-recamaras="2" data-banos="1" data-m2="70.68" data-estacionamientos="1"
           data-descripcion="Departamento en renta muy cerca del centro de la ciudad, galerías Mall, centro de gobierno, universidad kino, etc. Dos recámaras con minisplit cada una, baño, cocina equipada, sala/comedor con minisplit, área común, incluye agua, un cajón de estacionamiento con portón eléctrico para mayor seguridad cuenta con cámaras de vigilancia. "
           data-ubicacion="Hermosillo, Sonora"
-          data-fotos="assets/dpto1a.jpg|assets/dpto1b.jpg|assets/dpto1c.jpg|assets/dpto1d.jpg|assets/dpto1e.jpg|assets/dpto1f.jpg|assets/dpto1g.jpg|assets/dpto1h.jpg|assets/dpto1i.jpg">
+          data-mapa="https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d4146.823901787674!2d-110.95195138694949!3d29.074686533487085!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zMjnCsDA0JzI5LjciTiAxMTDCsDU2JzQwLjYiVw!5e0!3m2!1ses-419!2smx!4v1788736283641!5m2!1ses-419!2smx"
+          data-fotos="assets/dpto2a.jpg|assets/dpto2b.jpg|assets/dpto2c.jpg|assets/dpto2d.jpg|assets/dpto2e.jpg|assets/dpto2f.jpg|assets/dpto2g.jpg|assets/dpto2h.jpg|assets/dpto2i.jpg|assets/dpto2j.jpg|assets/dpto2k.jpg">
           <div class="card-img-wrap">
             <div class="card-slider">
               <div class="card-slides">
@@ -171,14 +185,72 @@
               <div class="card-slider-dots"></div>
             </div>
             <div class="card-badge nuevo">Nuevo</div>
+            <button class="card-share-btn" aria-label="Compartir esta propiedad" title="Compartir">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="18" cy="5" r="3"></circle>
+                <circle cx="6" cy="12" r="3"></circle>
+                <circle cx="18" cy="19" r="3"></circle>
+                <line x1="8.6" y1="13.5" x2="15.4" y2="17.5"></line>
+                <line x1="15.4" y1="6.5" x2="8.6" y2="10.5"></line>
+              </svg>
+            </button>
           </div>
           <div class="card-body">
             <p class="card-ubicacion">Colonia San Juan, HMO Sonora</p>
-            <h3 class="card-nombre">Departamento en Colonia San Juan, 16-N</h3>
+            <h3 class="card-nombre">Departamento en Colonia San Juan, 16-G</h3>
             <p class="card-precio">$11,500 <span>MXN</span></p>
             <div class="card-specs">
               <span>2 rec.</span><span>·</span>
               <span>1 baños</span><span>·</span>
+              <span>60.78 m²</span><span>·</span>
+              <span>1 estac. </span>
+            </div>
+          </div>
+        </article>
+
+        <article class="propiedad-card reveal-up delay-3" data-tipo="departamento"
+          data-id="dpto-san-juan-16c"
+          data-nombre="Departamento en Colonia San Juan, 16-C"
+          data-precio="$9,500 MXN"
+          data-recamaras="1" data-banos="1" data-m2="40.1" data-estacionamientos="1"
+          data-descripcion="Departamento en renta muy cerca del centro de la ciudad, galerías Mall, centro de gobierno, universidad kino, etc. Una recámara, un baño, cocina equipada, sala/comedor con minisplit, área común, incluye agua, un cajón de estacionamiento con portón eléctrico para mayor seguridad cuenta con cámaras de vigilancia. "
+          data-ubicacion="Hermosillo, Sonora"
+          data-mapa="https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d4146.823901787674!2d-110.95195138694949!3d29.074686533487085!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zMjnCsDA0JzI5LjciTiAxMTDCsDU2JzQwLjYiVw!5e0!3m2!1ses-419!2smx!4v1788736283641!5m2!1ses-419!2smx"
+          data-fotos="assets/dpto3a.jpg|assets/dpto3b.jpg|assets/dpto3c.jpg|assets/dpto3d.jpg|assets/dpto3e.jpg|assets/dpto3f.jpg|assets/dpto3g.jpg|assets/dpto3h.jpg|assets/dpto3i.jpg">
+          <div class="card-img-wrap">
+            <div class="card-slider">
+              <div class="card-slides">
+                <div class="card-slide" style="background:#d8d0c0;"></div>
+                <div class="card-slide" style="background:#c8c0b0;"></div>
+                <div class="card-slide" style="background:#d8d0c0;"></div>
+                <div class="card-slide" style="background:#c8c0b0;"></div>
+                <div class="card-slide" style="background:#d8d0c0;"></div>
+                <div class="card-slide" style="background:#c8c0b0;"></div>
+                <div class="card-slide" style="background:#d8d0c0;"></div>
+                <div class="card-slide" style="background:#c8c0b0;"></div>
+                <div class="card-slide" style="background:#d8d0c0;"></div>
+              </div>
+              <div class="card-slider-dots"></div>
+            </div>
+            <div class="card-badge nuevo">Nuevo</div>
+            <button class="card-share-btn" aria-label="Compartir esta propiedad" title="Compartir">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="18" cy="5" r="3"></circle>
+                <circle cx="6" cy="12" r="3"></circle>
+                <circle cx="18" cy="19" r="3"></circle>
+                <line x1="8.6" y1="13.5" x2="15.4" y2="17.5"></line>
+                <line x1="15.4" y1="6.5" x2="8.6" y2="10.5"></line>
+              </svg>
+            </button>
+          </div>
+          <div class="card-body">
+            <p class="card-ubicacion">Colonia San Juan, HMO Sonora</p>
+            <h3 class="card-nombre">Departamento en Colonia San Juan, 16-C</h3>
+            <p class="card-precio">$9,500 <span>MXN</span></p>
+            <div class="card-specs">
+              <span>1 rec.</span><span>·</span>
+              <span>1 baños</span><span>·</span>
+              <span>40.1 m²</span><span>·</span>
               <span>1 estac. </span>
             </div>
           </div>
@@ -186,6 +258,7 @@
 
 
         <article class="propiedad-card reveal-up" data-tipo="terreno"
+          data-id="terreno-caborca-sahuaro"
           data-nombre="El Sahuaro, 83635 Heroica Caborca, Son."
           data-precio="$5,900,000 MXN"
           data-recamaras="—" data-banos="—" data-m2="7,380" data-estacionamientos="—"
@@ -202,6 +275,15 @@
               <div class="card-slider-dots"></div>
             </div>
             <div class="card-badge nuevo">Nuevo</div>
+            <button class="card-share-btn" aria-label="Compartir esta propiedad" title="Compartir">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="18" cy="5" r="3"></circle>
+                <circle cx="6" cy="12" r="3"></circle>
+                <circle cx="18" cy="19" r="3"></circle>
+                <line x1="8.6" y1="13.5" x2="15.4" y2="17.5"></line>
+                <line x1="15.4" y1="6.5" x2="8.6" y2="10.5"></line>
+              </svg>
+            </button>
           </div>
           <div class="card-body">
             <p class="card-ubicacion">El Sahuaro, 83635 Heroica Caborca, Son.</p>
@@ -341,7 +423,7 @@
       <div class="footer-grid">
         <div class="footer-brand">
           <img src="assets/LogoHCHv1.png" alt="HCH Inmobiliaria" class="footer-logo" />
-          <p>HCH Inmobiliaria Sonora S.A. de C.V.<br />Expertos en bienes raíces desde 2008.</p>
+          <p>Inmobiliaria HCH Sonora S.A. de C.V.<br />Expertos en bienes raíces desde 2008.</p>
           <div class="footer-social">
             <a href="https://www.facebook.com/profile.php?id=61590994755102" class="social-icon" aria-label="Facebook" target="_blank" rel="noopener">
               <!-- Facebook -->
@@ -451,8 +533,24 @@
           </div>
         </div>
         <p class="modal-prop-desc" id="modalDesc">—</p>
+        <div class="modal-mapa-wrap" id="modalMapaWrap">
+          <p class="modal-mapa-label"><span class="mapa-pin">📍</span> Ubicación</p>
+          <div class="modal-mapa-embed">
+            <iframe id="modalMapaIframe" src="" width="600" height="450" style="border:0;" loading="lazy" referrerpolicy="strict-origin-when-cross-origin"></iframe>
+          </div>
+        </div>
         <div class="modal-cta-wrap">
           <button class="btn-primary" id="modalContactBtn">Solicitar información</button>
+          <button class="btn-secondary" id="modalShareBtn" aria-label="Compartir esta propiedad">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="18" cy="5" r="3"></circle>
+              <circle cx="6" cy="12" r="3"></circle>
+              <circle cx="18" cy="19" r="3"></circle>
+              <line x1="8.6" y1="13.5" x2="15.4" y2="17.5"></line>
+              <line x1="15.4" y1="6.5" x2="8.6" y2="10.5"></line>
+            </svg>
+            Compartir
+          </button>
         </div>
       </div>
     </div>
@@ -491,9 +589,9 @@
         </div>
         <div class="form-row">
           <div class="form-group">
-            <label for="interes">Me interesa</label>
-            <select id="interes" name="interes">
-              <option value="">Selecciona una opción</option>
+            <label for="interes">Me interesa *</label>
+            <select id="interes" name="interes" required>
+              <option value="" disabled selected>Selecciona una opción</option>
               <option value="comprar">Comprar</option>
               <option value="vender">Vender</option>
               <option value="rentar">Rentar</option>
@@ -502,14 +600,14 @@
             </select>
           </div>
           <div class="form-group">
-            <label for="presupuesto">Presupuesto aproximado</label>
-            <select id="presupuesto" name="presupuesto">
-              <option value="">Selecciona rango</option>
+            <label for="presupuesto">Presupuesto aproximado *</label>
+            <select id="presupuesto" name="presupuesto" required>
+              <option value="" disabled selected>Selecciona rango</option>
               <option value="menos1m">Menos de $1,000,000</option>
               <option value="1-3m">$1,000,000 – $3,000,000</option>
               <option value="3-6m">$3,000,000 – $6,000,000</option>
               <option value="mas6m">Más de $6,000,000</option>
-              <option value="menos1m">Otro</option>
+              <option value="otro">Otro</option>
             </select>
           </div>
         </div>

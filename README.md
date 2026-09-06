@@ -35,16 +35,19 @@ En `css/styles.css`, busca `.hero-bg-placeholder` y reemplaza el `background:` c
 }
 ```
 
-### Imagen de NOSOTROS
-En `css/styles.css`, busca `.about-img-placeholder` y reemplaza el `background:` con:
-```css
-.about-img-placeholder {
-  background-image: url('../assets/about-image.jpg');
-  background-size: cover;
-  background-position: center;
-}
+### Video de NOSOTROS
+La sección "Nosotros" ahora usa un video en bucle, sin sonido y sin controles en vez de una imagen. Está en `index.html`, dentro de `.about-img-wrap`:
+```html
+<div class="about-img-placeholder">
+  <video class="about-video" src="assets/inmobiliariaHCHsonora.mp4"
+         autoplay muted loop playsinline preload="auto"></video>
+</div>
 ```
-Elimina el `::before` si ya no necesitas el texto "Imagen".
+Para cambiar el video, solo reemplaza el archivo `assets/inmobiliariaHCHsonora.mp4` por el tuyo (mismo nombre) o actualiza el `src` con el nuevo nombre de archivo. Recomendaciones:
+- Formato **MP4 (H.264)**, para máxima compatibilidad.
+- Sin audio (o con audio, ya que el atributo `muted` lo silencia igual).
+- Peso ligero (~5–15MB, comprimido) para que cargue rápido.
+- Si quieres que se vea completo sin recortes (como las fotos), cambia en `css/styles.css` la regla `.about-img-placeholder video { object-fit: cover; }` por `object-fit: contain;`.
 
 ### Imágenes de PROPIEDADES (cards)
 En `index.html`, en cada `<article class="propiedad-card">`, el elemento `.card-img-placeholder` muestra un color de placeholder. Para usar imagen real, cambia la estructura del `card-img-wrap`:
@@ -129,9 +132,3 @@ emailjs.send('SERVICE_ID', 'TEMPLATE_ID', formData);
 Cada testimonio es un `.testimonio-card` dentro de `#testimoniosTrack`. Los dots se generan automáticamente por JavaScript. Solo agrega más cards y el slider las detecta.
 
 ---
-
-## Tips de rendimiento
-
-- Optimiza las imágenes a WebP (max ~200KB por imagen)
-- El hero puede ser una imagen comprimida de 1920×1080
-- Las cards funcionan bien con imágenes de 800×500
