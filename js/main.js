@@ -477,6 +477,16 @@ const propModal    = document.getElementById('propiedadModal');
   function openPropModal(card) {
     currentPropCard = card;
     document.getElementById('modalTipo').textContent     = capitalize(card.dataset.tipo);
+
+    /* Estado: Disponible / Rentado — solo se muestra si la propiedad trae data-estado */
+    const estadoWrap = document.getElementById('modalEstadoWrap');
+    const estadoText = document.getElementById('modalEstado');
+    if (card.dataset.estado) {
+      estadoText.textContent = capitalize(card.dataset.estado);
+      estadoWrap.style.display = '';
+    } else {
+      estadoWrap.style.display = 'none';
+    }
     document.getElementById('modalNombre').textContent   = card.dataset.nombre;
     document.getElementById('modalUbicacion').textContent= '📍 ' + card.dataset.ubicacion;
     document.getElementById('modalPrecio').textContent   = card.dataset.precio;
