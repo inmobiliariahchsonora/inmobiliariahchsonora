@@ -375,7 +375,7 @@ body.cursor-active select { cursor: text !important; }
   display: block;
   background: var(--surface2);
 }
-/* El video no debe mostrar controles ni permitir que el usuario los saque con clic derecho */
+/* El video no debe mostrar controles */
 .about-img-placeholder video::-webkit-media-controls { display: none !important; }
 .about-img-placeholder video::-webkit-media-controls-enclosure { display: none !important; }
 .about-accent-line {
@@ -525,6 +525,28 @@ body.cursor-active select { cursor: text !important; }
 }
 .card-badge.nuevo { background: var(--gold); color: var(--white); border-color: var(--gold); }
 .card-badge.exclusiva { background: var(--ink); color: var(--gold-xlight); border-color: transparent; }
+/* Badge "Rentado"*/
+.card-badge.rentado {
+  top: 0.85rem; 
+  left: 0.9rem;
+  right: 2.9rem;
+  width: auto;
+  height: 26px;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  line-height: 1;
+  padding: 0 0.6rem;
+  font-size: 0.7rem;
+  letter-spacing: 0.16em;
+  background: var(--ink);
+  color: var(--white);
+  border-color: transparent;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.22);
+  z-index: 4;
+}
 /* Botón compartir — tarjeta de propiedad */
 .card-share-btn {
   position: absolute; top: 0.85rem; right: 0.85rem;
