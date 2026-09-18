@@ -76,6 +76,19 @@
 
   .propiedades-grid { grid-template-columns: 1fr; }
   .servicios-grid { grid-template-columns: 1fr; }
+
+  /* ── Animación de entrada de tarjetas en móvil ──
+     En móvil las tarjetas van en 1 sola columna, así que aparecen de una en una.
+     Los delays escalonados (delay-1/2/3), pensados para cuando se ven 3 juntas,
+     aquí solo hacen que cada tarjeta se quede "colgada" antes de aparecer. */
+  .propiedad-card.delay-1,
+  .propiedad-card.delay-2,
+  .propiedad-card.delay-3 { transition-delay: 0s !important; }
+  /* Ahora que el disparo ocurre con el elemento ya visible (ver main.js),
+     este desplazamiento sí se alcanza a ver — un poco más notorio que antes */
+  .reveal-up   { transform: translateY(24px); }
+  .reveal-left  { transform: translateX(-24px); }
+  .reveal-right { transform: translateX(24px); }
   /* Servicios slider en móvil: 1 card, ancho completo del contenedor */
   .servicios-slider { width: 100%; overflow: hidden; }
   .servicios-track .servicio-card {

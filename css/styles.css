@@ -343,15 +343,46 @@ body.cursor-active select { cursor: text !important; }
   50% { opacity:0.35; transform:scaleY(0.5); }
 }
 .reveal-up, .reveal-left, .reveal-right {
-  opacity: 0; transition: opacity 0.6s ease, transform 0.6s cubic-bezier(0.25,0.46,0.45,0.94);
+  opacity: 0;
+  /* Fundido largo con curva suave (ease-out): entra rápido y frena despacio,
+     para que se perciba como un desvanecido y no como un elemento que "salta" */
+  transition: opacity 0.95s cubic-bezier(0.22, 0.61, 0.36, 1),
+              transform 0.95s cubic-bezier(0.22, 0.61, 0.36, 1);
+  /* Avisar al navegador que estos elementos se van a animar, para que los
+     componga en GPU y la entrada no se vea entrecortada */
+  will-change: opacity, transform;
 }
-.reveal-up   { transform: translateY(28px); }
-.reveal-left  { transform: translateX(-38px); }
-.reveal-right { transform: translateX(38px); }
-.reveal-up.visible, .reveal-left.visible, .reveal-right.visible { opacity:1; transform:translate(0); }
-.delay-1 { transition-delay:0.1s !important; }
-.delay-2 { transition-delay:0.2s !important; }
-.delay-3 { transition-delay:0.3s !important; }
+.reveal-up   { transform: translateY(26px); }
+.reveal-left  { transform: translateX(-32px); }
+.reveal-right { transform: translateX(32px); }
+.reveal-up.visible, .reveal-left.visible, .reveal-right.visible {
+  opacity:1; transform:translate(0);
+  /* Una vez visible ya no necesita capa propia: liberarla ahorra memoria,
+     que es justo lo que satura al navegador en celular */
+  will-change: auto;
+}
+/* Escalonado más sutil: con 3 tarjetas por fila, delays largos hacen que la
+   última se sienta desconectada de las demás */
+.delay-1 { transition-delay:0.08s !important; }
+.delay-2 { transition-delay:0.16s !important; }
+.delay-3 { transition-delay:0.24s !important; }
+
+/* Las tarjetas de propiedades tienen su PROPIA transición para el efecto
+   hover (transform var(--t), box-shadow, border-color). Como esa regla
+   pesa lo mismo en especificidad que .reveal-up y aparece después en la
+   hoja de estilos, ganaba ella — y por eso la tarjeta aparecía de golpe
+   (sin transición de opacidad) en vez de fundido suave como el texto.
+   Con el selector combinado ".propiedad-card.reveal-up" (más específico)
+   forzamos que, mientras la tarjeta aún no se ha revelado, use el fundido
+   lento; y en cuanto termina de aparecer (clase .visible ya puesta),
+   ".propiedad-card.visible" recupera la transición rápida para el hover. */
+.propiedad-card.reveal-up {
+  transition: opacity 0.95s cubic-bezier(0.22, 0.61, 0.36, 1),
+              transform 0.95s cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+.propiedad-card.visible {
+  transition: transform var(--t), box-shadow var(--t), border-color var(--t);
+}
 .nosotros { padding: 7rem 0; background: var(--white); }
 .nosotros-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center; }
 .about-img-wrap { position: relative; }
@@ -462,8 +493,11 @@ body.cursor-active select { cursor: text !important; }
   width: 100%;
   height: 100%;
   transition: transform 0.65s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-  will-change: transform;
 }
+/* will-change solo mientras la tarjeta está a la vista (lo activa el JS).
+   Tenerlo siempre encendido en las 5 tarjetas obliga al navegador a mantener
+   una capa GPU por cada galería de fotos, y eso es lo que traba el scroll en celular */
+.card-slider.en-vista .card-slides { will-change: transform; }
 .card-slide {
   flex: 0 0 100%;  
   width: 100%;
