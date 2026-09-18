@@ -160,11 +160,19 @@ const navbar      = document.getElementById('navbar');
 
   /* /* ========================================================= */
 const revealEls = document.querySelectorAll('.reveal-up, .reveal-left, .reveal-right');
+  /* El elemento empieza a desvanecerse cuando ya está entrando en pantalla,
+     no antes. Un margen positivo (adelantar el disparo) parecía buena idea,
+     pero terminaba pasando lo mismo en escritorio que en celular: para
+     cuando el usuario alcanzaba el elemento con el scroll, la animación
+     (0.95s) ya había terminado y solo se veía el resultado final, sin
+     movimiento. Con margen negativo, el disparo espera a que el elemento
+     ya esté un poco dentro del viewport, así el fundido ocurre mientras
+     el usuario lo está viendo. */
   const revObs = new IntersectionObserver((entries) => {
     entries.forEach(e => {
       if (e.isIntersecting) { e.target.classList.add('visible'); revObs.unobserve(e.target); }
     });
-  }, { threshold: 0.1, rootMargin: '0px 0px -30px 0px' });
+  }, { threshold: 0, rootMargin: '0px 0px -8% 0px' });
 
   revealEls.forEach(el => {
     if (!el.closest('.hero')) revObs.observe(el);
@@ -214,11 +222,17 @@ document.querySelectorAll('.card-slider').forEach(slider => {
     fotos.forEach((src, i) => {
       if (!allSlides[i]) return;
       const img = document.createElement('img');
-      img.src     = src;
       img.alt     = '';
       img.loading = i === 0 ? 'eager' : 'lazy';
-      img.style.cssText = 'position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;';
+      /* Arranca transparente y se funde al terminar de cargar, para que la foto
+         no aparezca de golpe encima del color de fondo de la tarjeta.
+         Se incluye 'transform' para no anular el zoom suave del hover. */
+      img.style.cssText = 'position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;opacity:0;transition:opacity 0.7s ease, transform 0.5s cubic-bezier(0.25,0.46,0.45,0.94);';
+      img.onload  = () => { img.style.opacity = '1'; };
       img.onerror = () => img.remove();
+      img.src     = src; /* asignar el src al final, ya con los handlers puestos */
+      /* Si la imagen venía en caché puede cargar antes de registrar onload */
+      if (img.complete && img.naturalWidth) img.style.opacity = '1';
       allSlides[i].appendChild(img);
     });
 
@@ -285,6 +299,29 @@ document.querySelectorAll('.card-slider').forEach(slider => {
     });
 
     startAuto();
+
+    /* Pausar el carrusel cuando la tarjeta no está a la vista.
+       Con varias tarjetas, tener todas las galerías avanzando a la vez —
+       incluso fuera de pantalla — es lo que hace que el scroll se sienta trabado
+       en celular. También activa/desactiva la capa GPU (clase 'en-vista'). */
+    const sliderObs = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          slider.classList.add('en-vista');
+          startAuto();
+        } else {
+          slider.classList.remove('en-vista');
+          clearInterval(autoTimer);
+        }
+      });
+    }, { threshold: 0.15 });
+    sliderObs.observe(slider);
+
+    /* Si la pestaña queda en segundo plano, no gastar recursos animando */
+    document.addEventListener('visibilitychange', () => {
+      if (document.hidden) clearInterval(autoTimer);
+      else if (slider.classList.contains('en-vista')) startAuto();
+    });
   });
 
   /* /* ========================================================= */
